@@ -1,6 +1,5 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    firefox
     obsidian
     zotero
     kdePackages.dolphin
