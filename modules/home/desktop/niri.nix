@@ -230,7 +230,7 @@ in {
 
         Print { screenshot; }
         Mod+Print { screenshot-window write-to-disk=false; }
-        Mod+shift+Print { screenshot-screen write-to-disk=false; }
+        Mod+Shift+Print { screenshot-screen write-to-disk=false; }
 
         Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
     }
@@ -242,5 +242,10 @@ in {
     kdePackages.polkit-kde-agent-1
     networkmanagerapplet
     pavucontrol
+    playerctl
+    wl-clipboard
+    grim
+    slurp
+    xwayland-satellite
   ];
 }

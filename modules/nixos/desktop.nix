@@ -1,4 +1,7 @@
 {pkgs, ...}: {
+  programs.niri.enable = true;
+  services.gnome.gcr-ssh-agent.enable = false;
+
   services.greetd = {
     enable = true;
     settings.default_session = {
@@ -25,20 +28,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    niri
     brightnessctl
-    playerctl
-    wl-clipboard
-    grim
-    slurp
-    xwayland-satellite
   ];
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gnome];
-    config.common.default = "*";
-  };
-
-  security.polkit.enable = true;
 }
