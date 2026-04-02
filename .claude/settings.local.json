@@ -10,7 +10,12 @@
       "WebFetch(domain:search.nixos.org)",
       "WebFetch(domain:home-manager-options.extranix.com)",
       "WebSearch",
-      "Bash(nix fmt:*)"
+      "Bash(nix fmt:*)",
+      "Bash(git commit:*)",
+      "Bash(nix flake:*)",
+      "WebFetch(domain:community.frame.work)",
+      "WebFetch(domain:wiki.nixos.org)",
+      "Bash(git add:*)"
     ]
   }
 }
