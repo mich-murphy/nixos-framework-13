@@ -14,6 +14,7 @@
     ./desktop/hyprlock.nix
     ./desktop/hypridle.nix
     ./desktop/gtk.nix
+    ./firefox.nix
     ./apps.nix
     ./media.nix
     ./ssh.nix

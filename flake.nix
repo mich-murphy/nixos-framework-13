@@ -15,6 +15,11 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -22,6 +27,7 @@
     home-manager,
     disko,
     nixos-hardware,
+    firefox-addons,
     ...
   }: {
     nixosConfigurations.p0ch1t4 = nixpkgs.lib.nixosSystem {
@@ -33,6 +39,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "backup";
+          nixpkgs.overlays = [firefox-addons.overlays.default];
           home-manager.extraSpecialArgs = {
             colors = import ./theme/tokyonight.nix;
           };
