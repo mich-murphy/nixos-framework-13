@@ -1,0 +1,47 @@
+{
+  description = "NixOS configuration for Framework 13 (AMD Ryzen AI 7 350)";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+  };
+
+  outputs = {
+    nixpkgs,
+    home-manager,
+    disko,
+    nixos-hardware,
+    ...
+  }: {
+    nixosConfigurations.p0ch1t4 = nixpkgs.lib.nixosSystem {
+      modules = [
+        disko.nixosModules.disko
+        nixos-hardware.nixosModules.framework-amd-ai-300-series
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.backupFileExtension = "backup";
+          home-manager.extraSpecialArgs = {
+            colors = import ./theme/tokyonight.nix;
+          };
+          home-manager.users.michael = import ./modules/home;
+        }
+        ./hosts/framework-13
+      ];
+    };
+
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+  };
+}
