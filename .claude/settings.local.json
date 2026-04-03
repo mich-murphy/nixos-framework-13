@@ -15,7 +15,10 @@
       "Bash(nix flake:*)",
       "WebFetch(domain:community.frame.work)",
       "WebFetch(domain:wiki.nixos.org)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "WebFetch(domain:www.anthropic.com)",
+      "Bash(nix build:*)",
+      "Bash(nix log:*)"
     ]
   }
 }
