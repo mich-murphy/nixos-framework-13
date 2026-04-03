@@ -49,6 +49,20 @@
       ];
     };
 
+    checks.x86_64-linux = let
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config.allowUnfree = true;
+        overlays = [firefox-addons.overlays.default];
+      };
+    in {
+      system-services = pkgs.testers.runNixOSTest (import ./tests/system-services.nix {inherit home-manager;});
+      user-config = pkgs.testers.runNixOSTest (import ./tests/user-config.nix {inherit home-manager;});
+      packages = pkgs.testers.runNixOSTest (import ./tests/packages.nix {inherit home-manager;});
+      graphical = pkgs.testers.runNixOSTest (import ./tests/graphical.nix {inherit home-manager;});
+      login = pkgs.testers.runNixOSTest (import ./tests/login.nix {inherit home-manager;});
+    };
+
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
   };
 }
