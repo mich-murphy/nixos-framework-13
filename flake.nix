@@ -23,6 +23,7 @@
   };
 
   outputs = {
+    self,
     nixpkgs,
     home-manager,
     disko,
@@ -61,6 +62,20 @@
       packages = pkgs.testers.runNixOSTest (import ./tests/packages.nix {inherit home-manager;});
       graphical = pkgs.testers.runNixOSTest (import ./tests/graphical.nix {inherit home-manager;});
       login = pkgs.testers.runNixOSTest (import ./tests/login.nix {inherit home-manager;});
+    };
+
+    nixosConfigurations.user-test-vm = nixpkgs.lib.nixosSystem {
+      modules = [
+        (import ./tests/interactive-vm.nix {inherit home-manager firefox-addons;})
+      ];
+    };
+
+    packages.x86_64-linux.user-test-vm =
+      self.nixosConfigurations.user-test-vm.config.system.build.vm;
+
+    apps.x86_64-linux.user-test-vm = {
+      type = "app";
+      program = "${self.packages.x86_64-linux.user-test-vm}/bin/run-nixos-vm";
     };
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
