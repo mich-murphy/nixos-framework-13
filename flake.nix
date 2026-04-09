@@ -73,9 +73,11 @@
     packages.x86_64-linux.user-test-vm =
       self.nixosConfigurations.user-test-vm.config.system.build.vm;
 
-    apps.x86_64-linux.user-test-vm = {
+    apps.x86_64-linux.user-test-vm = let
+      vmHostName = self.nixosConfigurations.user-test-vm.config.networking.hostName;
+    in {
       type = "app";
-      program = "${self.packages.x86_64-linux.user-test-vm}/bin/run-nixos-vm";
+      program = "${self.packages.x86_64-linux.user-test-vm}/bin/run-${vmHostName}-vm";
     };
 
     formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
