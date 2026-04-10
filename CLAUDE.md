@@ -13,7 +13,18 @@
 - **Confirm before bulk changes.** Before applying batch fixes, verify each issue is real in the current channel, then present the full list for user confirmation before editing.
 - **Batch in small validated groups.** Break multi-module changes into groups of 2-3 files. Run `nix flake check` after each group; stop on failure.
 - **Use agents for cross-file analysis.** Before changes spanning multiple NixOS/home-manager modules, use sub-agents to read and analyze each affected file, then synthesize findings before proposing edits.
-- **Self-correct with `nix flake check`.** Run `nix flake check` after every .nix file edit. If it fails, revert and diagnose before retrying.
+- **Self-correct with targeted tests.** After editing a .nix file, consult `tests/MODULE_MAP.nix` for the relevant tests. Run only those tests — not the full suite. See Testing Workflow below.
+
+## Testing Workflow
+
+After editing any .nix file, run ONLY the relevant tests — never the full suite:
+
+1. Look up changed file(s) in `tests/MODULE_MAP.nix` to find mapped test names
+2. Run mapped unit tests first (fast): `nix build .#checks.x86_64-linux.<unit-test-name>`
+3. If unit tests pass, run mapped integration tests: `nix build .#checks.x86_64-linux.<integration-test-name>`
+4. On failure: read the FAIL line for the source file path and expected/actual values, fix, re-run only the failing test
+5. Do NOT run `nix flake check` on every change — only as a final gate before commit
+6. If a file is not in MODULE_MAP.nix, run `nix flake check --no-build` (eval-only, ~5s) to catch syntax errors
 
 ## User context
 

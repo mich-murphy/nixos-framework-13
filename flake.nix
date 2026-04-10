@@ -56,12 +56,38 @@
         config.allowUnfree = true;
         overlays = [firefox-addons.overlays.default];
       };
+      evalConfig = import ./tests/unit/eval-config.nix {inherit pkgs nixpkgs home-manager firefox-addons;};
     in {
-      system-services = pkgs.testers.runNixOSTest (import ./tests/system-services.nix {inherit home-manager;});
-      user-config = pkgs.testers.runNixOSTest (import ./tests/user-config.nix {inherit home-manager;});
-      packages = pkgs.testers.runNixOSTest (import ./tests/packages.nix {inherit home-manager;});
-      graphical = pkgs.testers.runNixOSTest (import ./tests/graphical.nix {inherit home-manager;});
-      login = pkgs.testers.runNixOSTest (import ./tests/login.nix {inherit home-manager;});
+      # Unit tests (fast, no VM)
+      unit-shell = import ./tests/unit/shell.nix {inherit pkgs evalConfig;};
+      unit-cli-tools = import ./tests/unit/cli-tools.nix {inherit pkgs evalConfig;};
+      unit-git = import ./tests/unit/git.nix {inherit pkgs evalConfig;};
+      unit-ssh = import ./tests/unit/ssh.nix {inherit pkgs evalConfig;};
+      unit-firefox = import ./tests/unit/firefox.nix {inherit pkgs evalConfig;};
+      unit-xdg-mime = import ./tests/unit/xdg-mime.nix {inherit pkgs evalConfig;};
+      unit-desktop-niri = import ./tests/unit/desktop-niri.nix {inherit pkgs evalConfig;};
+      unit-desktop-waybar = import ./tests/unit/desktop-waybar.nix {inherit pkgs evalConfig;};
+      unit-desktop-notifications = import ./tests/unit/desktop-notifications.nix {inherit pkgs evalConfig;};
+      unit-desktop-rofi = import ./tests/unit/desktop-rofi.nix {inherit pkgs evalConfig;};
+      unit-desktop-lock = import ./tests/unit/desktop-lock.nix {inherit pkgs evalConfig;};
+      unit-terminals = import ./tests/unit/terminals.nix {inherit pkgs evalConfig;};
+      unit-media = import ./tests/unit/media.nix {inherit pkgs evalConfig;};
+      unit-gtk = import ./tests/unit/gtk.nix {inherit pkgs evalConfig;};
+      unit-theme-propagation = import ./tests/unit/theme-propagation.nix {inherit pkgs evalConfig;};
+      unit-nixos-services = import ./tests/unit/nixos-services.nix {inherit pkgs evalConfig;};
+      unit-nixos-security = import ./tests/unit/nixos-security.nix {inherit pkgs evalConfig;};
+      unit-nixos-system = import ./tests/unit/nixos-system.nix {inherit pkgs evalConfig;};
+
+      # Integration tests (VM-based)
+      integration-system-services = pkgs.testers.runNixOSTest (import ./tests/integration/system-services.nix {inherit home-manager;});
+      integration-user-config = pkgs.testers.runNixOSTest (import ./tests/integration/user-config.nix {inherit home-manager;});
+      integration-packages = pkgs.testers.runNixOSTest (import ./tests/integration/packages.nix {inherit home-manager;});
+      integration-graphical = pkgs.testers.runNixOSTest (import ./tests/integration/graphical.nix {inherit home-manager;});
+      integration-login = pkgs.testers.runNixOSTest (import ./tests/integration/login.nix {inherit home-manager;});
+      integration-ssh-hardening = pkgs.testers.runNixOSTest (import ./tests/integration/ssh-hardening.nix {inherit home-manager;});
+      integration-firewall = pkgs.testers.runNixOSTest (import ./tests/integration/firewall.nix {inherit home-manager;});
+      integration-security = pkgs.testers.runNixOSTest (import ./tests/integration/security.nix {inherit home-manager;});
+      integration-home-manager-files = pkgs.testers.runNixOSTest (import ./tests/integration/home-manager-files.nix {inherit home-manager;});
     };
 
     nixosConfigurations.user-test-vm = nixpkgs.lib.nixosSystem {
