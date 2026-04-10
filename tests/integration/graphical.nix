@@ -29,7 +29,7 @@
         try:
             machine.succeed(cmd)
             print(f"PASS: {desc}")
-        except Exception as e:
+        except Exception:
             print(f"FAIL [graphical] {desc}")
             print(f"  fix: {fix_file}")
             raise
@@ -38,7 +38,7 @@
         try:
             machine.wait_until_succeeds(cmd, timeout=timeout)
             print(f"PASS: {desc}")
-        except Exception as e:
+        except Exception:
             print(f"FAIL [graphical] {desc}")
             print(f"  fix: {fix_file}")
             raise
