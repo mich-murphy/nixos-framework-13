@@ -23,10 +23,6 @@
   home-manager.users.michael = import ../modules/home;
 
   virtualisation.diskSize = 8192;
-  virtualisation.sharedDirectories.host-shared = {
-    source = "$HOME/shared-vm";
-    target = "/mnt/shared";
-  };
 
   nixpkgs.hostPlatform = "x86_64-linux";
 }
