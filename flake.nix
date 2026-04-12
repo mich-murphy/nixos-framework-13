@@ -77,16 +77,12 @@
       unit-nixos-services = import ./tests/unit/nixos-services.nix {inherit pkgs evalConfig;};
       unit-nixos-security = import ./tests/unit/nixos-security.nix {inherit pkgs evalConfig;};
       unit-nixos-system = import ./tests/unit/nixos-system.nix {inherit pkgs evalConfig;};
+      unit-nixos-hardware = import ./tests/unit/nixos-hardware.nix {inherit pkgs evalConfig;};
 
-      # Integration tests (VM-based)
-      integration-system-services = pkgs.testers.runNixOSTest (import ./tests/integration/system-services.nix {inherit home-manager;});
-      integration-user-config = pkgs.testers.runNixOSTest (import ./tests/integration/user-config.nix {inherit home-manager;});
-      integration-packages = pkgs.testers.runNixOSTest (import ./tests/integration/packages.nix {inherit home-manager;});
+      # Integration tests (VM-based, runtime behavior only)
+      integration-boot = pkgs.testers.runNixOSTest (import ./tests/integration/boot.nix {inherit home-manager;});
       integration-graphical = pkgs.testers.runNixOSTest (import ./tests/integration/graphical.nix {inherit home-manager;});
-      integration-login = pkgs.testers.runNixOSTest (import ./tests/integration/login.nix {inherit home-manager;});
-      integration-ssh-hardening = pkgs.testers.runNixOSTest (import ./tests/integration/ssh-hardening.nix {inherit home-manager;});
-      integration-firewall = pkgs.testers.runNixOSTest (import ./tests/integration/firewall.nix {inherit home-manager;});
-      integration-security = pkgs.testers.runNixOSTest (import ./tests/integration/security.nix {inherit home-manager;});
+      integration-user-config = pkgs.testers.runNixOSTest (import ./tests/integration/user-config.nix {inherit home-manager;});
       integration-home-manager-files = pkgs.testers.runNixOSTest (import ./tests/integration/home-manager-files.nix {inherit home-manager;});
     };
 

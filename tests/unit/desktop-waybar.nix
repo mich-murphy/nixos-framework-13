@@ -3,6 +3,7 @@
   evalConfig,
 }: let
   cfg = evalConfig.homeConfig.programs.waybar;
+  homePackages = evalConfig.homeConfig.home.packages;
   waybarStyle = pkgs.writeText "waybar-style" cfg.style;
   helpers = evalConfig.assertHelpers;
   check = "unit-desktop-waybar";
@@ -11,6 +12,7 @@
     if b
     then "true"
     else "false";
+  hasPackage = name: builtins.any (p: (p.pname or p.name or "") == name) homePackages;
 in
   pkgs.runCommand check {} ''
     source ${helpers}
@@ -32,6 +34,12 @@ in
       "waybar modules-left contains niri/workspaces" "${fix}"
     assert_equals "${check}" "${boolStr (builtins.elem "clock" cfg.settings.mainBar.modules-center)}" "true" \
       "waybar modules-center contains clock" "${fix}"
+
+    # --- Required packages for waybar modules ---
+    assert_equals "${check}" "${boolStr (hasPackage "pamixer")}" "true" \
+      "pamixer installed (for pulseaudio module volume control)" "${fix}"
+    assert_equals "${check}" "${boolStr (hasPackage "lm-sensors")}" "true" \
+      "lm_sensors installed (for temperature module)" "${fix}"
 
     echo ""
     echo "All ${check} assertions passed."
