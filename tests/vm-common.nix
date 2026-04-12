@@ -1,13 +1,19 @@
-{lib, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   imports = [
     ../modules/nixos/audio.nix
     ../modules/nixos/bluetooth.nix
     ../modules/nixos/boot.nix
     ../modules/nixos/desktop.nix
     ../modules/nixos/docker.nix
+    ../modules/nixos/hardware.nix
     ../modules/nixos/locale.nix
     ../modules/nixos/networking.nix
     ../modules/nixos/openssh.nix
+    ../modules/nixos/power.nix
     ../modules/nixos/security.nix
     ../modules/nixos/users.nix
   ];
@@ -25,8 +31,18 @@
 
   services.btrfs.autoScrub.enable = lib.mkForce false;
 
-  users.users.michael.initialPassword = lib.mkForce "testpassword";
+  # Hardware services that don't work in VM
+  services.fwupd.enable = lib.mkForce false;
+
+  users.users.michael.initialPassword = lib.mkForce "password";
   users.users.michael.initialHashedPassword = lib.mkForce null;
+
+  # Enable password auth for VM debugging
+  services.openssh.settings.PasswordAuthentication = lib.mkForce true;
+  services.openssh.openFirewall = lib.mkForce true;
+
+  # greeter needs video group for GPU access
+  users.users.greeter.extraGroups = ["video"];
 
   # nixpkgs.hostPlatform is set by the test framework's read-only nixpkgs
   system.stateVersion = "25.05";
@@ -39,8 +55,12 @@
       x = 1920;
       y = 1080;
     };
-    qemu.options = [
-      "-vga virtio"
+    forwardPorts = [
+      {
+        from = "host";
+        host.port = 2222;
+        guest.port = 22;
+      }
     ];
   };
 }
