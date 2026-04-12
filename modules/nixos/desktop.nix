@@ -20,11 +20,22 @@
 
   fonts = {
     packages = with pkgs; [
+      # Nerd Fonts (monospace with icons)
       nerd-fonts.jetbrains-mono
       nerd-fonts.hack
       nerd-fonts.meslo-lg
+      # Noto fonts (Unicode coverage)
+      noto-fonts
+      noto-fonts-color-emoji
+      # Microsoft-compatible fonts
+      liberation_ttf
     ];
-    fontconfig.defaultFonts.monospace = ["JetBrainsMono Nerd Font"];
+    fontconfig.defaultFonts = {
+      monospace = ["JetBrainsMono Nerd Font"];
+      sansSerif = ["Noto Sans"];
+      serif = ["Noto Serif"];
+      emoji = ["Noto Color Emoji"];
+    };
   };
 
   environment.systemPackages = with pkgs; [

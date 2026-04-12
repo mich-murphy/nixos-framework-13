@@ -3,8 +3,14 @@
   colors,
   ...
 }: {
+  home.packages = with pkgs; [
+    pamixer # Volume control for waybar pulseaudio module
+    lm_sensors # Temperature monitoring for waybar temperature module
+  ];
+
   programs.waybar = {
     enable = true;
+    systemd.enable = true;
     settings = {
       mainBar = {
         position = "top";

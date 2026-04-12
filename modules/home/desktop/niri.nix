@@ -4,6 +4,7 @@
   ...
 }: let
   polkitAgent = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1";
+  wallpaper = ../../../assets/wallpapers/evangelion-01.png;
 in {
   xdg.configFile."niri/config.kdl".text = ''
     environment {
@@ -49,6 +50,14 @@ in {
         hot-corners {
           off
         }
+    }
+
+    // QEMU virtual display (for VM testing)
+    output "Virtual-1" {
+        mode "1920x1080"
+        scale 1
+        transform "normal"
+        position x=0 y=0
     }
 
     layout {
@@ -118,6 +127,7 @@ in {
     }
 
     spawn-at-startup "awww-daemon"
+    spawn-sh-at-startup "sleep 0.5 && awww img ${wallpaper}"
     spawn-at-startup "udiskie"
     spawn-sh-at-startup "${polkitAgent} &"
     spawn-sh-at-startup "nm-applet --indicator"
