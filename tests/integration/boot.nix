@@ -44,5 +44,11 @@
     # User services (pipewire)
     check("pipewire service exists", "test -e /etc/systemd/user/pipewire.service", "modules/nixos/audio.nix")
     check("wireplumber service exists", "test -e /etc/systemd/user/wireplumber.service", "modules/nixos/audio.nix")
+
+    # Docker (rootless — runs as user service)
+    check("docker rootless service exists", "test -e /etc/systemd/user/docker.service", "modules/nixos/docker.nix")
+
+    # Libvirt
+    check("libvirtd is enabled", "systemctl is-enabled libvirtd.service", "modules/nixos/virtualisation.nix")
   '';
 }

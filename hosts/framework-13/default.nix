@@ -15,6 +15,7 @@
     ../../modules/nixos/power.nix
     ../../modules/nixos/security.nix
     ../../modules/nixos/users.nix
+    ../../modules/nixos/virtualisation.nix
   ];
 
   nixpkgs.hostPlatform = "x86_64-linux";

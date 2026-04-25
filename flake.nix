@@ -78,6 +78,10 @@
       unit-nixos-security = import ./tests/unit/nixos-security.nix {inherit pkgs evalConfig;};
       unit-nixos-system = import ./tests/unit/nixos-system.nix {inherit pkgs evalConfig;};
       unit-nixos-hardware = import ./tests/unit/nixos-hardware.nix {inherit pkgs evalConfig;};
+      unit-nixos-power = import ./tests/unit/nixos-power.nix {inherit pkgs evalConfig;};
+      unit-nixos-virtualisation = import ./tests/unit/nixos-virtualisation.nix {inherit pkgs evalConfig;};
+      unit-home-apps = import ./tests/unit/home-apps.nix {inherit pkgs evalConfig;};
+      unit-home-direnv = import ./tests/unit/home-direnv.nix {inherit pkgs evalConfig;};
 
       # Integration tests (VM-based, runtime behavior only)
       integration-boot = pkgs.testers.runNixOSTest (import ./tests/integration/boot.nix {inherit home-manager;});

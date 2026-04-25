@@ -72,14 +72,57 @@ flake-check:
 
 # ── Interactive VM ───────────────────────────────────────────────
 
-# Run interactive VM with virgl GPU (uses nixGL for non-NixOS hosts)
+# Run interactive VM with virt-manager (proper keyboard capture)
 vm:
     #!/usr/bin/env bash
     set -euo pipefail
     nix build .#user-test-vm -o result-vm
-    # Use nixGL to provide GPU drivers, virgl for 3D acceleration
-    QEMU_OPTS="-device virtio-vga-gl -display gtk,gl=on" \
-      nix run --impure github:nix-community/nixGL -- ./result-vm/bin/run-*-vm
+
+    # Extract paths from the NixOS VM
+    SYSTEM=$(readlink -f result-vm/system)
+    KERNEL="$SYSTEM/kernel"
+    INITRD=$(dirname "$SYSTEM")/initrd  # initrd is sibling to system in the store
+    # Find initrd by parsing the run script
+    INITRD=$(grep -oP '(?<=-initrd )\S+' result-vm/bin/run-*-vm)
+    CMDLINE="$(cat "$SYSTEM/kernel-params") init=$SYSTEM/init console=tty0"
+
+    # Create directories for 9p shared filesystems
+    VM_TMP="$PWD/.vm-disks/tmp"
+    mkdir -p "$VM_TMP/xchg" "$VM_TMP/shared"
+
+    # Create disk image if missing
+    DISK="$PWD/.vm-disks/nixos-test-vm.qcow2"
+    mkdir -p "$(dirname "$DISK")"
+    if [[ ! -f "$DISK" ]]; then
+      echo "Creating VM disk image..."
+      qemu-img create -f qcow2 "$DISK" 8G
+      # Format as ext4 with nixos label
+      TEMP=$(mktemp)
+      qemu-img convert -f qcow2 -O raw "$DISK" "$TEMP"
+      mkfs.ext4 -L nixos "$TEMP"
+      qemu-img convert -f raw -O qcow2 "$TEMP" "$DISK"
+      rm "$TEMP"
+    fi
+
+    # Generate libvirt XML with NixOS-specific boot config
+    sed -e "s|DISK_PATH|$DISK|" \
+        -e "s|KERNEL_PATH|$KERNEL|" \
+        -e "s|INITRD_PATH|$INITRD|" \
+        -e "s|SHARED_DIR|$VM_TMP/shared|" \
+        -e "s|XCHG_DIR|$VM_TMP/xchg|" \
+        -e "s|CMDLINE|$CMDLINE|" \
+        tests/libvirt-vm.xml > /tmp/nixos-test-vm.xml
+
+    virsh -c qemu:///session destroy nixos-test-vm 2>/dev/null || true
+    virsh -c qemu:///session undefine nixos-test-vm 2>/dev/null || true
+    virsh -c qemu:///session define /tmp/nixos-test-vm.xml
+    virsh -c qemu:///session start nixos-test-vm
+    virt-manager --connect qemu:///session --show-domain-console nixos-test-vm
+
+# Stop and remove the interactive VM
+vm-stop:
+    virsh -c qemu:///session destroy nixos-test-vm 2>/dev/null || true
+    virsh -c qemu:///session undefine nixos-test-vm 2>/dev/null || true
 
 # ── Installation ─────────────────────────────────────────────────
 

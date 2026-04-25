@@ -23,6 +23,10 @@
     "unit-nixos-security"
     "unit-nixos-services"
     "unit-nixos-system"
+    "unit-nixos-power"
+    "unit-nixos-virtualisation"
+    "unit-home-apps"
+    "unit-home-direnv"
     "unit-shell"
     "unit-ssh"
     "unit-terminals"
@@ -50,6 +54,11 @@
     "modules/nixos/hardware.nix" = ["integration-boot"];
     "modules/nixos/users.nix" = ["integration-boot" "integration-user-config"];
     "modules/nixos/desktop.nix" = ["integration-boot" "integration-graphical"];
+    "modules/nixos/docker.nix" = ["integration-boot"];
+    "modules/nixos/virtualisation.nix" = ["integration-boot"];
+    "modules/nixos/power.nix" = [];
+    "modules/home/apps.nix" = [];
+    "modules/home/shell/direnv.nix" = [];
     "modules/home/default.nix" = ["integration-home-manager-files"];
   };
 }

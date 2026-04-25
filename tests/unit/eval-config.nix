@@ -32,6 +32,7 @@
       ../../modules/nixos/power.nix
       ../../modules/nixos/security.nix
       ../../modules/nixos/users.nix
+      ../../modules/nixos/virtualisation.nix
       {
         boot.loader.systemd-boot.enable = pkgs.lib.mkForce false;
         boot.loader.efi.canTouchEfiVariables = pkgs.lib.mkForce false;

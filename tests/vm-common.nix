@@ -16,6 +16,7 @@
     ../modules/nixos/power.nix
     ../modules/nixos/security.nix
     ../modules/nixos/users.nix
+    ../modules/nixos/virtualisation.nix
   ];
 
   # nix.nix is excluded because the test framework uses read-only nixpkgs.
