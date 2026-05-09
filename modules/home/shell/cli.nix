@@ -17,7 +17,7 @@
 
   programs.fzf = {
     enable = true;
-    enableFishIntegration = false;
+    enableFishIntegration = true;
     defaultOptions = [
       "--highlight-line"
       "--info=inline-right"

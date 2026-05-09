@@ -55,10 +55,6 @@ in {
         name = "sponge";
         src = pkgs.fishPlugins.sponge.src;
       }
-      {
-        name = "fzf-fish";
-        src = pkgs.fishPlugins.fzf-fish.src;
-      }
     ];
   };
 }
