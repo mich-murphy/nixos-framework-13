@@ -4,15 +4,12 @@ NixOS configuration for a Framework 13 (AMD Ryzen AI 7 350) — standalone flake
 
 ## Project map
 
-- `flake.nix` — entrypoint; defines system config (`p0ch1t4`), checks, and test VM
+- `flake.nix` — entrypoint; defines system config (`p0ch1t4`)
 - `hosts/framework-13/` — host-specific hardware and disk config
 - `modules/nixos/` — system-level NixOS modules (boot, networking, security, audio, etc.)
 - `modules/home/` — home-manager modules (shell, desktop, apps, terminals, etc.)
 - `theme/tokyonight.nix` — shared color palette, passed to home-manager as `colors`
-- `tests/unit/` — fast eval-only unit tests
-- `tests/integration/` — VM-based integration tests
-- `tests/MODULE_MAP.nix` — lists all unit tests; maps source files → integration tests
-- `justfile` — developer commands (`just all`, `just test`, `just check`, `just build`)
+- `justfile` — developer commands (`just all`, `just check`, `just build`)
 - `scripts/run-silent.sh` — context-efficient wrapper (PASS/FAIL only, detail on failure)
 
 ## Preferences
@@ -28,19 +25,13 @@ All commands use context-efficient wrappers (PASS/FAIL summary, detail only on f
 
 | Command | What it does |
 | --- | --- |
-| `just all` | Run everything: check + test + build |
+| `just all` | Run everything: check + build |
 | `just check` | Format (alejandra) + eval-only flake check |
 | `just fmt` | Format all Nix files with alejandra |
 | `just eval` | Eval-only flake syntax check (~5s) |
-| `just test` | Run all unit + integration tests |
-| `just unit` | Run all unit tests (eval-only, fast) |
-| `just unit-one <name>` | Run a single unit test (e.g. `just unit-one unit-shell`) |
-| `just integration` | Run all integration tests (VM-based, slow) |
-| `just integration-one <name>` | Run a single integration test |
 | `just build` | Build system config + full flake check |
 | `just build-system` | Build the NixOS system configuration |
 | `just flake-check` | Full `nix flake check` (final gate before commit) |
-| `nix run .#user-test-vm` | Launch interactive VM for UAT |
 | `sudo nixos-rebuild switch --flake .` | Apply configuration to the running system |
 
 </important>
@@ -72,7 +63,7 @@ Read the relevant files and analyze the error before suggesting fixes. Do not gu
 
 <important if="you have edited a .nix file">
 
-Run `/test` to validate changes.
+Run `just check` to validate changes.
 
 </important>
 
