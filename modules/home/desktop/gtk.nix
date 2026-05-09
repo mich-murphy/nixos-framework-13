@@ -1,6 +1,8 @@
 {pkgs, ...}: {
   gtk = {
     enable = true;
+    gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+    gtk4.extraConfig.gtk-application-prefer-dark-theme = 1;
     gtk4.theme = null;
     theme = {
       name = "Tokyonight-Dark";
@@ -16,6 +18,14 @@
       size = 10;
     };
   };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk";
+    style.name = "adwaita-dark";
+  };
+
+  dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
 
   home.pointerCursor = {
     name = "Bibata-Modern-Classic";
