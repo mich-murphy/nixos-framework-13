@@ -9,11 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    disko = {
-      url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     firefox-addons = {
@@ -26,14 +21,12 @@
     self,
     nixpkgs,
     home-manager,
-    disko,
     nixos-hardware,
     firefox-addons,
     ...
   }: {
     nixosConfigurations.p0ch1t4 = nixpkgs.lib.nixosSystem {
       modules = [
-        disko.nixosModules.disko
         nixos-hardware.nixosModules.framework-amd-ai-300-series
         home-manager.nixosModules.home-manager
         {

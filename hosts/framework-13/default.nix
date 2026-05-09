@@ -1,7 +1,6 @@
 {...}: {
   imports = [
     ./hardware-configuration.nix
-    ./disko.nix
     ../../modules/nixos/boot.nix
     ../../modules/nixos/hardware.nix
     ../../modules/nixos/networking.nix
