@@ -26,8 +26,8 @@
       delve
       gotools # provides goimports
       markdownlint-cli2
-      nodePackages.markdown-toc
-      nodePackages.prettier
+      markdown-toc
+      prettier
       vscode-extensions.vadimcn.vscode-lldb # provides codelldb
     ];
   };
