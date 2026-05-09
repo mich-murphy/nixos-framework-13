@@ -8,6 +8,7 @@
     ../../modules/nixos/audio.nix
     ../../modules/nixos/bluetooth.nix
     ../../modules/nixos/desktop.nix
+    ../../modules/nixos/keyd.nix
     ../../modules/nixos/docker.nix
     ../../modules/nixos/locale.nix
     ../../modules/nixos/nix.nix
