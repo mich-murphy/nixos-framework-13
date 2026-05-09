@@ -36,8 +36,8 @@
           format = "{icon}";
           format-icons = {
             active = "󰮯";
-            empty = "";
-            default = "";
+            empty = "";
+            default = "";
             urgent = "󰊠";
           };
           disable-markup = true;
@@ -47,23 +47,23 @@
           interval = 10;
           format = "{icon} {temperatureC}°";
           critical-threshold = 80;
-          format-icons = ["" "" "" "" ""];
+          format-icons = ["" "" "" "" ""];
         };
 
         cpu = {
           interval = 10;
-          format = " {}%";
+          format = " {}%";
         };
 
         memory = {
           interval = 30;
-          format = " {used:0.1f}G";
+          format = " {used:0.1f}G";
         };
 
         mpris = {
-          format = " {artist} - {title}";
+          format = " {artist} - {title}";
           tooltip-format = "{album}";
-          format-paused = " {artist} - {title}";
+          format-paused = " {artist} - {title}";
           on-click = "playerctl play-pause";
           on-scroll-up = "playerctl previous";
           on-scroll-down = "playerctl next";
@@ -72,14 +72,14 @@
 
         pulseaudio = {
           format = "{icon} {volume}%";
-          format-bluetooth = "{volume}% {icon}";
+          format-bluetooth = "{volume}% {icon}";
           format-muted = "{icon}";
           format-icons = {
-            headphone = "";
-            headset = "";
+            headphone = "";
+            headset = "";
             headphone-muted = "󰟎";
             headset-muted = "󰟎";
-            default = ["" ""];
+            default = ["" ""];
             default-muted = "󰖁";
           };
           scroll-step = 2;
@@ -90,18 +90,18 @@
 
         battery = {
           format = "{icon} {capacity}%";
-          format-charging = " {capacity}%";
-          format-icons = ["" "" "" "" ""];
+          format-charging = " {capacity}%";
+          format-icons = ["" "" "" "" ""];
         };
 
         network = {
           interval = 10;
-          format-wifi = " {bandwidthDownBits}  {bandwidthUpBits} ";
+          format-wifi = " {bandwidthDownBits}  {bandwidthUpBits} ";
           format-ethernet = "󰈀 {ipaddr}/{cidr}";
           format-disconnected = "";
           tooltip-format = "{ifname} via {gwaddr} 󰈀";
-          tooltip-format-wifi = "{essid} ({signalStrength}%) ";
-          tooltip-format-ethernet = "{ifname} ";
+          tooltip-format-wifi = "{essid} ({signalStrength}%) ";
+          tooltip-format-ethernet = "{ifname} ";
           tooltip-format-disconnected = "Disconnected";
           menu = "on-click";
           menu-file = "~/.config/waybar/menus/network.xml";
@@ -143,11 +143,11 @@
           scroll-step = 2;
           format = "{icon} {percent}%";
           tooltip-format = "{percent}%";
-          format-icons = ["" "" "" "" "" "" "" "" "" "" "" "" "" "" ""];
+          format-icons = ["" "" "" "" "" "" "" "" "" "" "" "" "" "" ""];
         };
 
         "custom/expand" = {
-          format = "";
+          format = "";
           tooltip = false;
         };
 
@@ -162,7 +162,7 @@
         };
 
         "custom/menu" = {
-          format = "";
+          format = "";
           tooltip = false;
           menu = "on-click";
           menu-file = "~/.config/waybar/menus/power.xml";
@@ -180,7 +180,7 @@
       * {
         border: none;
         border-radius: 0;
-        font-family: "JetBrainsMono Nerd Font";
+        font-family: "0xProto Nerd Font", "Symbols Nerd Font";
         font-size: 0.95rem;
         font-weight: 700;
         min-height: 20px;
@@ -270,7 +270,7 @@
       <object class="GtkMenu" id="menu">
         <child>
           <object class="GtkMenuItem" id="action-1">
-            <property name="label"> Network settings</property>
+            <property name="label"> Network settings</property>
           </object>
         </child>
       </object>
@@ -283,7 +283,7 @@
       <object class="GtkMenu" id="menu">
         <child>
           <object class="GtkMenuItem" id="lock">
-            <property name="label"> Lock</property>
+            <property name="label"> Lock</property>
           </object>
         </child>
         <child>
@@ -293,12 +293,12 @@
         </child>
         <child>
           <object class="GtkMenuItem" id="reboot">
-            <property name="label"> Reboot</property>
+            <property name="label"> Reboot</property>
           </object>
         </child>
         <child>
           <object class="GtkMenuItem" id="shutdown">
-            <property name="label"> Shutdown</property>
+            <property name="label"> Shutdown</property>
           </object>
         </child>
       </object>

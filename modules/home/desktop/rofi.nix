@@ -40,7 +40,7 @@
   xdg.dataFile."rofi/minimal.rasi".text = ''
     configuration {
         show-icons:                 false;
-        font:                       "JetBrainsMono Nerd Font 9";
+        font:                       "0xProto Nerd Font 9";
     }
 
     @import "~/.local/share/rofi/colorscheme.rasi"

@@ -81,7 +81,7 @@ config.switch_to_last_active_tab_when_closing_tab = true
 
 -- General
 config.color_scheme = "Tokyo Night"
-config.font = wezterm.font("JetBrainsMono Nerd Font")
+config.font = wezterm.font("0xProto Nerd Font")
 config.font_size = 10
 config.use_dead_keys = false
 config.adjust_window_size_when_changing_font_size = false

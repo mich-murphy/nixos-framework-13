@@ -12,7 +12,7 @@
       size = 20;
     };
     font = {
-      name = "JetBrainsMono Nerd Font";
+      name = "0xProto Nerd Font";
       size = 10;
     };
   };

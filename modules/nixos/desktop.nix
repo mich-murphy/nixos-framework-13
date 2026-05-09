@@ -21,9 +21,8 @@
   fonts = {
     packages = with pkgs; [
       # Nerd Fonts (monospace with icons)
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.hack
-      nerd-fonts.meslo-lg
+      nerd-fonts._0xproto
+      nerd-fonts.symbols-only
       # Noto fonts (Unicode coverage)
       noto-fonts
       noto-fonts-color-emoji
@@ -31,7 +30,7 @@
       liberation_ttf
     ];
     fontconfig.defaultFonts = {
-      monospace = ["JetBrainsMono Nerd Font"];
+      monospace = ["0xProto Nerd Font"];
       sansSerif = ["Noto Sans"];
       serif = ["Noto Serif"];
       emoji = ["Noto Color Emoji"];

@@ -4,7 +4,7 @@
     settings = {
       max-visible = 10;
       layer = "top";
-      font = "JetBrainsMono Nerd Font 10";
+      font = "0xProto Nerd Font 10";
       background-color = colors.bg;
       text-color = colors.fg;
       border-color = colors.bg3;

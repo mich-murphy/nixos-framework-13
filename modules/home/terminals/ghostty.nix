@@ -3,7 +3,7 @@
     enable = true;
     settings = {
       theme = "TokyoNight Night";
-      font-family = "JetBrainsMono Nerd Font";
+      font-family = "0xProto Nerd Font";
       font-size = 10;
       window-padding-x = 10;
       keybind = [

@@ -47,7 +47,7 @@ in {
           font_color = toHypr colors.fg;
           fade_on_empty = false;
           rounding = 0;
-          font_family = "JetBrainsMono Nerd Font";
+          font_family = "0xProto Nerd Font";
           placeholder_text = "Enter password";
           fail_text = "$PAMFAIL";
           dots_spacing = 0.3;
