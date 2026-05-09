@@ -14,6 +14,7 @@
         email = "github@elmurphy.com";
       };
       init.defaultBranch = "main";
+      url."git@github.com:".insteadOf = "https://github.com/";
       fetch.prune = true;
       pull.rebase = true;
       merge = {
