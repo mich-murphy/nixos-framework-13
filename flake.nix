@@ -20,6 +20,11 @@
       url = "github:folke/tokyonight.nvim";
       flake = false;
     };
+
+    claude-code = {
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -29,6 +34,7 @@
     nixos-hardware,
     firefox-addons,
     tokyonight-nvim,
+    claude-code,
     ...
   }: {
     nixosConfigurations.p0ch1t4 = nixpkgs.lib.nixosSystem {
@@ -39,7 +45,10 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "backup";
-          nixpkgs.overlays = [firefox-addons.overlays.default];
+          nixpkgs.overlays = [
+            firefox-addons.overlays.default
+            claude-code.overlays.default
+          ];
           home-manager.extraSpecialArgs = {
             colors = import ./theme/tokyonight.nix;
             inherit tokyonight-nvim;
