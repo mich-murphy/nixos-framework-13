@@ -16,6 +16,7 @@
     ./desktop/gtk.nix
     ./firefox.nix
     ./apps.nix
+    ./neovim.nix
     ./media.nix
     ./ssh.nix
     ./xdg.nix

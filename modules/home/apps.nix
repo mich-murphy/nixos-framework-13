@@ -6,6 +6,5 @@
     vlc
     gimp
     owncloud-client
-    neovim
   ];
 }
