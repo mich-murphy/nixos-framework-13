@@ -4,6 +4,7 @@
     viAlias = true;
     vimAlias = true;
     withPython3 = true;
+    withRuby = false;
     extraPackages = with pkgs; [
       # nvim-treesitter parser build deps
       tree-sitter
