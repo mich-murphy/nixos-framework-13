@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  colors,
+  ...
+}: {
   programs.git = {
     enable = true;
 
@@ -58,13 +62,14 @@
       line-numbers = true;
       navigate = true;
       side-by-side = true;
-      minus-style = "syntax \"#4a272f\"";
-      minus-emph-style = "syntax \"#713137\"";
-      plus-style = "syntax \"#243e4a\"";
-      plus-emph-style = "syntax \"#2c5a66\"";
-      line-numbers-minus-style = "#914c54";
-      line-numbers-plus-style = "#449dab";
-      line-numbers-zero-style = "#3b4261";
+      syntax-theme = "tokyonight_night";
+      minus-style = "syntax \"${colors.diff_minus_bg}\"";
+      minus-emph-style = "syntax \"${colors.diff_minus_emph_bg}\"";
+      plus-style = "syntax \"${colors.diff_plus_bg}\"";
+      plus-emph-style = "syntax \"${colors.diff_plus_emph_bg}\"";
+      line-numbers-minus-style = colors.diff_minus_fg;
+      line-numbers-plus-style = colors.diff_plus_fg;
+      line-numbers-zero-style = colors.fg_gutter;
     };
   };
 

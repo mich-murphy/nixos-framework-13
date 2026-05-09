@@ -1,11 +1,16 @@
 {
   pkgs,
   colors,
+  tokyonight-nvim,
   ...
 }: {
   programs.bat = {
     enable = true;
     config.theme = "tokyonight_night";
+    themes.tokyonight_night = {
+      src = tokyonight-nvim;
+      file = "extras/sublime/tokyonight_night.tmTheme";
+    };
   };
 
   programs.eza = {

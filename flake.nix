@@ -15,6 +15,11 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    tokyonight-nvim = {
+      url = "github:folke/tokyonight.nvim";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -23,6 +28,7 @@
     home-manager,
     nixos-hardware,
     firefox-addons,
+    tokyonight-nvim,
     ...
   }: {
     nixosConfigurations.p0ch1t4 = nixpkgs.lib.nixosSystem {
@@ -36,6 +42,7 @@
           nixpkgs.overlays = [firefox-addons.overlays.default];
           home-manager.extraSpecialArgs = {
             colors = import ./theme/tokyonight.nix;
+            inherit tokyonight-nvim;
           };
           home-manager.users.michael = import ./modules/home;
         }

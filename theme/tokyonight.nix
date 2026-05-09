@@ -23,4 +23,11 @@
   purple = "#bb9af7";
   purple0 = "#9d7cd8";
   magenta = "#ff007c";
+
+  diff_minus_bg = "#4a272f";
+  diff_minus_emph_bg = "#713137";
+  diff_plus_bg = "#243e4a";
+  diff_plus_emph_bg = "#2c5a66";
+  diff_minus_fg = "#914c54";
+  diff_plus_fg = "#449dab";
 }
