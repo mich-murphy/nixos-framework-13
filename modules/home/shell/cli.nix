@@ -47,6 +47,8 @@
       "--color=info:${colors.bg4}"
       "--color=marker:${colors.magenta}"
       "--color=pointer:${colors.magenta}"
+      "--color=preview-bg:${colors.bg_dark}"
+      "--color=preview-fg:${colors.fg}"
       "--color=prompt:${colors.cyan}"
       "--color=query:${colors.fg}:regular"
       "--color=scrollbar:${colors.teal}"
@@ -54,11 +56,15 @@
       "--color=spinner:${colors.magenta}"
     ];
     fileWidgetOptions = [
-      "--preview=bat --color=always {}"
+      "--preview='bat --color=always {}'"
       "--preview-window=~2,border-none"
     ];
     changeDirWidgetOptions = [
-      "--preview=tree -C {} | head -n 10"
+      "--preview='tree -C {} | head -n 10'"
+      "--preview-window=border-none"
+    ];
+    historyWidgetOptions = [
+      "--preview-window=border-none"
     ];
   };
 
