@@ -7,4 +7,6 @@
   };
 
   programs.ssh.startAgent = true;
+  # Avoid racing with the OpenSSH ssh-agent above.
+  services.gnome.gcr-ssh-agent.enable = false;
 }

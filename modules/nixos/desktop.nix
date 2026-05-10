@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   programs.niri.enable = true;
   programs.dconf.enable = true;
-  services.gnome.gcr-ssh-agent.enable = false;
 
   xdg.portal = {
     enable = true;
