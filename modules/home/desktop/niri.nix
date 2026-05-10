@@ -139,11 +139,12 @@ in {
 
     binds {
         Mod+Shift+Slash { show-hotkey-overlay; }
+        Mod+F1 hotkey-overlay-title="Show Keyboard Shortcuts" { show-hotkey-overlay; }
         Mod+Return       hotkey-overlay-title="Open a Terminal: wezterm"      { spawn "wezterm"; }
         Mod+Shift+Return hotkey-overlay-title="Open a Browser: firefox"       { spawn "firefox"; }
         Mod+E            hotkey-overlay-title="Open a File Browser: dolphin"  { spawn "dolphin"; }
         Mod+Space        hotkey-overlay-title="Run an Application: rofi"      { spawn-sh "pkill rofi || rofi -show drun -theme ~/.local/share/rofi/minimal.rasi"; }
-        Mod+C            hotkey-overlay-title="Run a Calculator: rofi"        { spawn-sh "pkill rofi || rofi -show calc -modi calc -no-show-match -no-sort -calc-command \"echo -n '{result}' | wl-copy\" -theme ~/.local/share/rofi/minimal.rasi"; }
+        Mod+Shift+C      hotkey-overlay-title="Run a Calculator: rofi"        { spawn-sh "pkill rofi || rofi -show calc -modi calc -no-show-match -no-sort -calc-command \"echo -n '{result}' | wl-copy\" -theme ~/.local/share/rofi/minimal.rasi"; }
         Super+X          hotkey-overlay-title="Lock the Screen: hyprlock"     { spawn "hyprlock"; }
         Super+Shift+X    hotkey-overlay-title="Logout"                        { quit; }
         Mod+O repeat=false { toggle-overview; }
@@ -231,12 +232,19 @@ in {
         Mod+BracketLeft  { consume-window-into-column; }
         Mod+BracketRight { expel-window-from-column; }
 
-        Mod+R { switch-preset-column-width; }
-        Mod+F { maximize-column; }
+        Mod+R       { switch-preset-column-width; }
+        Mod+F       { maximize-column; }
         Mod+Shift+F { fullscreen-window; }
+        Mod+Ctrl+F  { expand-column-to-available-width; }
 
-        Mod+Minus { set-column-width "-10%"; }
-        Mod+Equal { set-column-width "+10%"; }
+        Mod+Minus       { set-column-width "-10%"; }
+        Mod+Equal       { set-column-width "+10%"; }
+        Mod+Shift+Minus { set-window-height "-10%"; }
+        Mod+Shift+Equal { set-window-height "+10%"; }
+        Mod+Ctrl+R      { reset-window-height; }
+
+        Mod+C      { center-column; }
+        Mod+Ctrl+C { center-window; }
 
         Mod+T       { toggle-window-floating; }
         Mod+Shift+T { switch-focus-between-floating-and-tiling; }
