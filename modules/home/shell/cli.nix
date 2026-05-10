@@ -23,12 +23,19 @@
   programs.fzf = {
     enable = true;
     enableFishIntegration = true;
+    defaultCommand = "fd --type f --hidden --exclude .git";
+    fileWidgetCommand = "fd --type f --hidden --exclude .git";
+    changeDirWidgetCommand = "fd --type d --hidden --exclude .git";
     defaultOptions = [
       "--highlight-line"
       "--info=inline-right"
       "--ansi"
       "--layout=reverse"
       "--border=none"
+      "--height=60"
+      "--prompt=∷ "
+      "--pointer=▶"
+      "--marker=⇒"
       "--color=bg+:${colors.bg2}"
       "--color=bg:${colors.bg_dark}"
       "--color=border:${colors.teal}"
@@ -45,6 +52,13 @@
       "--color=scrollbar:${colors.teal}"
       "--color=separator:${colors.orange}"
       "--color=spinner:${colors.magenta}"
+    ];
+    fileWidgetOptions = [
+      "--preview=bat --color=always {}"
+      "--preview-window=~2,border-none"
+    ];
+    changeDirWidgetOptions = [
+      "--preview=tree -C {} | head -n 10"
     ];
   };
 
