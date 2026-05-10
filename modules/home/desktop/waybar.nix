@@ -264,44 +264,6 @@
     '';
   };
 
-  xdg.configFile."waybar/menus/network.xml".text = ''
-    <?xml version="1.0" encoding="UTF-8"?>
-    <interface>
-      <object class="GtkMenu" id="menu">
-        <child>
-          <object class="GtkMenuItem" id="action-1">
-            <property name="label"> Network settings</property>
-          </object>
-        </child>
-      </object>
-    </interface>
-  '';
-
-  xdg.configFile."waybar/menus/power.xml".text = ''
-    <?xml version="1.0" encoding="UTF-8"?>
-    <interface>
-      <object class="GtkMenu" id="menu">
-        <child>
-          <object class="GtkMenuItem" id="lock">
-            <property name="label"> Lock</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkMenuItem" id="logout">
-            <property name="label">󰗼 Logout</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkMenuItem" id="reboot">
-            <property name="label"> Reboot</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkMenuItem" id="shutdown">
-            <property name="label"> Shutdown</property>
-          </object>
-        </child>
-      </object>
-    </interface>
-  '';
+  xdg.configFile."waybar/menus/network.xml".source = ./waybar/menus/network.xml;
+  xdg.configFile."waybar/menus/power.xml".source = ./waybar/menus/power.xml;
 }
