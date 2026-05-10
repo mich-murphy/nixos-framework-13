@@ -5,6 +5,18 @@
 }: let
   polkitAgent = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1";
   wallpaper = ../../../assets/wallpapers/evangelion-01.png;
+
+  arrangeOutputs = pkgs.writeShellApplication {
+    name = "niri-arrange-outputs";
+    runtimeInputs = with pkgs; [niri jq];
+    text = builtins.readFile ./niri/arrange-outputs.sh;
+  };
+
+  watchOutputs = pkgs.writeShellApplication {
+    name = "niri-watch-outputs";
+    runtimeInputs = [pkgs.niri arrangeOutputs];
+    text = builtins.readFile ./niri/watch-outputs.sh;
+  };
 in {
   xdg.configFile."niri/config.kdl".text = ''
     environment {
@@ -26,35 +38,17 @@ in {
         focus-follows-mouse max-scroll-amount="95%"
     }
 
-    output "DVI-I-1" {
-        mode "3440x1440"
-        scale 1
-        transform "normal"
-        position x=0 y=0
-        variable-refresh-rate on-demand=true
-        hot-corners {
-          off
-        }
-    }
-
+    // Output positions are managed at runtime by niri-arrange-outputs
+    // (spawn-at-startup below). External monitors stack above eDP-1.
     output "eDP-1" {
         focus-at-startup
         mode "2880x1920@120.000"
         scale 2
         transform "normal"
-        position x=960 y=1440
         variable-refresh-rate on-demand=true
         hot-corners {
           off
         }
-    }
-
-    // QEMU virtual display (for VM testing)
-    output "Virtual-1" {
-        mode "1920x1080"
-        scale 1
-        transform "normal"
-        position x=0 y=0
     }
 
     layout {
@@ -131,6 +125,8 @@ in {
         }
     }
 
+    spawn-at-startup "${arrangeOutputs}/bin/niri-arrange-outputs"
+    spawn-at-startup "${watchOutputs}/bin/niri-watch-outputs"
     spawn-at-startup "awww-daemon"
     spawn-sh-at-startup "sleep 0.5 && awww img ${wallpaper}"
     spawn-at-startup "udiskie"
