@@ -5,6 +5,9 @@
     vimAlias = true;
     withPython3 = true;
     withRuby = false;
+    initLua = ''
+      require("config.lazy")
+    '';
     extraPackages = with pkgs; [
       # nvim-treesitter parser build deps
       tree-sitter
