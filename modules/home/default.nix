@@ -3,6 +3,7 @@
     ./shell/fish.nix
     ./shell/starship.nix
     ./shell/cli.nix
+    ./shell/claude-code.nix
     ./shell/direnv.nix
     ./git.nix
     ./terminals/wezterm.nix

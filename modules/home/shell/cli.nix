@@ -137,6 +137,6 @@
     tree
     procs
     ouch
-    claude-code
+    just
   ];
 }
