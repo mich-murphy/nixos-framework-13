@@ -48,6 +48,19 @@
           nixpkgs.overlays = [
             firefox-addons.overlays.default
             claude-code.overlays.default
+            # Strip `border-spacing` from GTK 3 stylesheets — it's a GTK 4-only
+            # property and triggers parser warnings in every GTK 3 app.
+            # Upstream: https://github.com/Fausto-Korpsvart/Tokyonight-GTK-Theme/issues/91
+            (_: prev: {
+              tokyonight-gtk-theme = prev.tokyonight-gtk-theme.overrideAttrs (old: {
+                postInstall =
+                  (old.postInstall or "")
+                  + ''
+                    find "$out/share/themes" -path '*/gtk-3.0/gtk.css' \
+                      -exec sed -i '/^[[:space:]]*border-spacing:/d' {} +
+                  '';
+              });
+            })
           ];
           home-manager.extraSpecialArgs = {
             colors = import ./theme/tokyonight.nix;
