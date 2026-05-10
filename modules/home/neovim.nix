@@ -34,6 +34,8 @@
       prettier
       ruff
       marksman
+      nixd
+      alejandra
       vscode-extensions.vadimcn.vscode-lldb # provides codelldb
     ];
   };
