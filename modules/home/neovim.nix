@@ -32,6 +32,8 @@
       markdownlint-cli2
       markdown-toc
       prettier
+      ruff
+      marksman
       vscode-extensions.vadimcn.vscode-lldb # provides codelldb
     ];
   };
