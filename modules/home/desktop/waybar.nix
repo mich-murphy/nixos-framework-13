@@ -94,22 +94,6 @@
           format-icons = ["" "" "" "" ""];
         };
 
-        network = {
-          interval = 10;
-          format-wifi = " {bandwidthDownBits}  {bandwidthUpBits} ";
-          format-ethernet = "󰈀 {ipaddr}/{cidr}";
-          format-disconnected = "";
-          tooltip-format = "{ifname} via {gwaddr} 󰈀";
-          tooltip-format-wifi = "{essid} ({signalStrength}%) ";
-          tooltip-format-ethernet = "{ifname} ";
-          tooltip-format-disconnected = "Disconnected";
-          menu = "on-click";
-          menu-file = "~/.config/waybar/menus/network.xml";
-          menu-actions = {
-            action-1 = "nm-connection-editor";
-          };
-        };
-
         bluetooth = {
           format = "{}";
           format-on = "󰂰";
@@ -213,8 +197,7 @@
       #tray,
       #battery,
       #custom-menu,
-      #custom-expand,
-      #network {
+      #custom-expand {
         color: ${colors.fg};
         background-color: ${colors.bg};
         padding: 0 10px;
@@ -264,6 +247,5 @@
     '';
   };
 
-  xdg.configFile."waybar/menus/network.xml".source = ./waybar/menus/network.xml;
   xdg.configFile."waybar/menus/power.xml".source = ./waybar/menus/power.xml;
 }

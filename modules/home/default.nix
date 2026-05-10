@@ -7,7 +7,6 @@
     ./shell/direnv.nix
     ./git.nix
     ./terminals/wezterm.nix
-    ./terminals/ghostty.nix
     ./desktop/niri.nix
     ./desktop/waybar.nix
     ./desktop/mako.nix

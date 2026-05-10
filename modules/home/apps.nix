@@ -3,7 +3,6 @@
     obsidian
     zotero
     kdePackages.dolphin
-    vlc
     gimp
     owncloud-client
   ];
