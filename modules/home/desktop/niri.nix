@@ -13,7 +13,6 @@ in {
 
     input {
         keyboard {
-            xkb {}
             repeat-delay 300
             repeat-rate 30
             numlock
@@ -23,8 +22,6 @@ in {
             natural-scroll
             scroll-factor 0.5
         }
-        mouse {}
-        trackpoint {}
         workspace-auto-back-and-forth
         focus-follows-mouse max-scroll-amount="95%"
     }
@@ -90,7 +87,6 @@ in {
           length total-proportion=0.3
           corner-radius 15
         }
-        struts {}
     }
 
     hotkey-overlay {
