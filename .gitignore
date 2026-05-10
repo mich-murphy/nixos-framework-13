@@ -4,3 +4,4 @@ result*
 **/settings.local.json
 *.qcow2
 tests/libvirt-vm.xml
+plans
