@@ -112,7 +112,6 @@ in {
     }
 
     window-rule {
-        match app-id="firefox"
         match app-id="Zotero"
         open-maximized true
     }
