@@ -121,6 +121,16 @@ in {
         block-out-from "screen-capture"
     }
 
+    layer-rule {
+        match namespace="^waybar$"
+        geometry-corner-radius 12
+        shadow {
+            on
+            softness 40
+            spread 5
+        }
+    }
+
     spawn-at-startup "awww-daemon"
     spawn-sh-at-startup "sleep 0.5 && awww img ${wallpaper}"
     spawn-at-startup "udiskie"
