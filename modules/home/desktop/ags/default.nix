@@ -1,5 +1,5 @@
 {
   pkgs,
-  astal-niri-src,
+  astal-niri,
 }:
-pkgs.callPackage "${astal-niri-src}/lib/niri" {}
+astal-niri.packages.${pkgs.system}.niri

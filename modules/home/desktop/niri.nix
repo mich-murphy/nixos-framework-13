@@ -131,16 +131,6 @@ in {
         block-out-from "screen-capture"
     }
 
-    layer-rule {
-        match namespace="^waybar$"
-        geometry-corner-radius 12
-        shadow {
-            on
-            softness 40
-            spread 5
-        }
-    }
-
     // ============================================================
     // Startup
     // ============================================================
@@ -154,9 +144,11 @@ in {
     spawn-sh-at-startup "sleep 0.5 && awww img ${wallpaper}"
 
     // Tray & system services
-    spawn-at-startup "udiskie"
+    spawn-at-startup "udiskie" "--no-tray"
     spawn-sh-at-startup "${polkitAgent} &"
-    spawn-sh-at-startup "nm-applet --indicator"
+
+    // Desktop shell
+    spawn-at-startup "ags-shell"
 
     // ============================================================
     // Key bindings

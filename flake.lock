@@ -1,7 +1,11 @@
 {
   "nodes": {
-    "astal-niri-src": {
-      "flake": false,
+    "astal-niri": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
       "locked": {
         "lastModified": 1765341517,
         "narHash": "sha256-4WAab6GmBTjpkm1I6vaWAiFdnuDCo7wMXLegGCXbuSs=",
@@ -132,7 +136,7 @@
     },
     "root": {
       "inputs": {
-        "astal-niri-src": "astal-niri-src",
+        "astal-niri": "astal-niri",
         "claude-code": "claude-code",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",

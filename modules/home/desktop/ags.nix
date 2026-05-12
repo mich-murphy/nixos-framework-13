@@ -1,10 +1,10 @@
 {
   pkgs,
   colors,
-  astal-niri-src,
+  astal-niri,
   ...
 }: let
-  astal-niri = import ./ags {inherit pkgs astal-niri-src;};
+  astal-niri-pkg = import ./ags {inherit pkgs astal-niri;};
 
   themeScss = pkgs.writeText "_theme.scss" ''
     $bg:        ${colors.bg};
@@ -27,11 +27,12 @@
 
   shell = pkgs.ags.bundle {
     pname = "ags-shell";
+    version = "0.1.0";
     src = agsSrc;
     entry = "app.ts";
-    gtk4 = true;
-    extraPackages =
-      [astal-niri]
+    enableGtk4 = true;
+    dependencies =
+      [astal-niri-pkg]
       ++ (with pkgs.astal; [
         astal4
         io
