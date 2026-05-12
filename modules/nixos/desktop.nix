@@ -4,10 +4,9 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-gnome
-      xdg-desktop-portal-gtk
-    ];
+    extraPortals = builtins.attrValues {
+      inherit (pkgs) xdg-desktop-portal-gnome xdg-desktop-portal-gtk;
+    };
     config.niri = {
       default = ["gnome" "gtk"];
       "org.freedesktop.impl.portal.Screenshot" = "gnome";
@@ -32,18 +31,16 @@
   };
 
   fonts = {
-    packages = with pkgs; [
+    packages = builtins.attrValues {
       # Nerd Fonts (monospace with icons)
-      nerd-fonts._0xproto
-      nerd-fonts.symbols-only
+      inherit (pkgs.nerd-fonts) _0xproto symbols-only;
       # Material Symbols (AGS shell icon system)
-      material-symbols
+      inherit (pkgs) material-symbols;
       # Noto fonts (Unicode coverage)
-      noto-fonts
-      noto-fonts-color-emoji
+      inherit (pkgs) noto-fonts noto-fonts-color-emoji;
       # Microsoft-compatible fonts
-      liberation_ttf
-    ];
+      inherit (pkgs) liberation_ttf;
+    };
     fontconfig.defaultFonts = {
       monospace = ["0xProto Nerd Font"];
       sansSerif = ["Noto Sans"];
@@ -52,7 +49,5 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    brightnessctl
-  ];
+  environment.systemPackages = [pkgs.brightnessctl];
 }

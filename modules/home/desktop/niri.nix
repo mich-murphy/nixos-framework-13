@@ -8,7 +8,7 @@
 
   arrangeOutputs = pkgs.writeShellApplication {
     name = "niri-arrange-outputs";
-    runtimeInputs = with pkgs; [niri jq];
+    runtimeInputs = builtins.attrValues {inherit (pkgs) niri jq;};
     text = builtins.readFile ./niri/arrange-outputs.sh;
   };
 
@@ -281,16 +281,8 @@ in {
     }
   '';
 
-  home.packages = with pkgs; [
-    awww
-    udiskie
-    kdePackages.polkit-kde-agent-1
-    networkmanagerapplet
-    pavucontrol
-    playerctl
-    wl-clipboard
-    grim
-    slurp
-    xwayland-satellite
-  ];
+  home.packages = builtins.attrValues {
+    inherit (pkgs) awww udiskie networkmanagerapplet pavucontrol playerctl wl-clipboard grim slurp xwayland-satellite;
+    inherit (pkgs.kdePackages) polkit-kde-agent-1;
+  };
 }

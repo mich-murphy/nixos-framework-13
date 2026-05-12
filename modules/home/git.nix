@@ -119,9 +119,7 @@
     *.rtf diff=pandoc-to-markdown
   '';
 
-  home.packages = with pkgs; [
-    exiftool
-    pandoc
-    gh
-  ];
+  home.packages = builtins.attrValues {
+    inherit (pkgs) exiftool pandoc gh;
+  };
 }
