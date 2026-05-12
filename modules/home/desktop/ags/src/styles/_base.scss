@@ -1,0 +1,28 @@
+* {
+  all: unset;
+  font-family: "Inter", "Sans", sans-serif;
+  font-size: 13px;
+  color: $fg;
+}
+
+window {
+  background: transparent;
+}
+
+.icon {
+  font-family: "Material Symbols Sharp";
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-feature-settings: 'liga';
+  font-size: 16px;
+  color: $fg;
+}
+
+.icon.inactive {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  color: $fg-muted;
+}
+
+.icon.active {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  color: $accent;
+}
