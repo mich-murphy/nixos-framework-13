@@ -146,17 +146,7 @@
     theme[upload_end]="${colors.red}"
   '';
 
-  home.packages = with pkgs; [
-    fd
-    sd
-    ripgrep
-    jq
-    curl
-    wget
-    rsync
-    tree
-    procs
-    ouch
-    just
-  ];
+  home.packages = builtins.attrValues {
+    inherit (pkgs) fd sd ripgrep jq curl wget rsync tree procs ouch just;
+  };
 }

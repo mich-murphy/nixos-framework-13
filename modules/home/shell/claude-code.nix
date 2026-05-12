@@ -1,7 +1,7 @@
 {pkgs, ...}: let
   statusline = pkgs.writeShellApplication {
     name = "claude-statusline";
-    runtimeInputs = with pkgs; [jq coreutils gawk];
+    runtimeInputs = builtins.attrValues {inherit (pkgs) jq coreutils gawk;};
     text = ''
       input=$(cat)
 

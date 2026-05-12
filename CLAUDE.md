@@ -26,9 +26,11 @@ All commands use context-efficient wrappers (PASS/FAIL summary, detail only on f
 | Command | What it does |
 | --- | --- |
 | `just all` | Run everything: check + build |
-| `just check` | Format (alejandra) + eval-only flake check |
+| `just check` | Format (alejandra) + eval-only flake check + Markdown lint |
 | `just fmt` | Format all Nix files with alejandra |
 | `just eval` | Eval-only flake syntax check (~5s) |
+| `just md-lint` | Lint all `.md` files with `markdownlint-cli2` |
+| `just md-fix` | Auto-fix Markdown lint issues where possible |
 | `just build` | Build system config + full flake check |
 | `just build-system` | Build the NixOS system configuration |
 | `just flake-check` | Full `nix flake check` (final gate before commit) |
@@ -64,6 +66,12 @@ Read the relevant files and analyze the error before suggesting fixes. Do not gu
 <important if="you have edited a .nix file">
 
 Run `just check` to validate changes.
+
+</important>
+
+<important if="you have edited or created a .md file (including under `plans/`)">
+
+All Markdown in this repo must lint clean under `markdownlint-cli2` (config: `.markdownlint-cli2.jsonc`). Run `just md-lint` after edits; use `just md-fix` for auto-fixable issues. Fenced code blocks must specify a language (use `text` for ASCII diagrams or file trees).
 
 </important>
 

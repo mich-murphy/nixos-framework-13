@@ -8,7 +8,7 @@
 
   arrangeOutputs = pkgs.writeShellApplication {
     name = "niri-arrange-outputs";
-    runtimeInputs = with pkgs; [niri jq];
+    runtimeInputs = builtins.attrValues {inherit (pkgs) niri jq;};
     text = builtins.readFile ./niri/arrange-outputs.sh;
   };
 
@@ -131,16 +131,6 @@ in {
         block-out-from "screen-capture"
     }
 
-    layer-rule {
-        match namespace="^waybar$"
-        geometry-corner-radius 12
-        shadow {
-            on
-            softness 40
-            spread 5
-        }
-    }
-
     // ============================================================
     // Startup
     // ============================================================
@@ -154,9 +144,11 @@ in {
     spawn-sh-at-startup "sleep 0.5 && awww img ${wallpaper}"
 
     // Tray & system services
-    spawn-at-startup "udiskie"
+    spawn-at-startup "udiskie" "--no-tray"
     spawn-sh-at-startup "${polkitAgent} &"
-    spawn-sh-at-startup "nm-applet --indicator"
+
+    // Desktop shell
+    spawn-at-startup "ags-shell"
 
     // ============================================================
     // Key bindings
@@ -289,16 +281,8 @@ in {
     }
   '';
 
-  home.packages = with pkgs; [
-    awww
-    udiskie
-    kdePackages.polkit-kde-agent-1
-    networkmanagerapplet
-    pavucontrol
-    playerctl
-    wl-clipboard
-    grim
-    slurp
-    xwayland-satellite
-  ];
+  home.packages = builtins.attrValues {
+    inherit (pkgs) awww udiskie networkmanagerapplet pavucontrol playerctl wl-clipboard grim slurp xwayland-satellite;
+    inherit (pkgs.kdePackages) polkit-kde-agent-1;
+  };
 }

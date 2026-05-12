@@ -1,6 +1,6 @@
 {colors, ...}: {
   services.mako = {
-    enable = true;
+    enable = false;
     settings = {
       max-visible = 10;
       layer = "top";
