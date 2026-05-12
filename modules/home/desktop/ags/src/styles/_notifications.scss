@@ -1,0 +1,127 @@
+// TODO(integration): style.scss must @import "./styles/notifications".
+
+window.notif-popups-window,
+window.notif-center-window {
+  background: transparent;
+}
+
+.notif-popups {
+  min-width: 360px;
+}
+
+.notif-popup {
+  background: $bg-alt;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.notif-row {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  transition: background 100ms ease;
+}
+
+.notif-row:hover {
+  background: $bg-dark;
+}
+
+.notif-inner {
+  padding: 10px 12px;
+}
+
+.notif-icon-slot {
+  min-width: 32px;
+  min-height: 32px;
+  padding-right: 4px;
+}
+
+.notif-app-icon {
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.notif-fallback-icon {
+  font-size: 24px;
+  color: $fg-muted;
+}
+
+.notif-text {
+  padding: 0 4px;
+}
+
+.notif-title {
+  font-weight: bold;
+  color: $fg;
+}
+
+.notif-time {
+  color: $fg-muted;
+  font-size: 11px;
+}
+
+.notif-body {
+  color: $fg-muted;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.notif-close {
+  background: transparent;
+  padding: 4px 6px;
+  border-radius: 0;
+  transition: background 100ms ease;
+}
+
+.notif-close:hover {
+  background: $error;
+  color: $fg;
+}
+
+.notif-center {
+  background: $bg-alt;
+  min-width: 400px;
+  padding: 12px;
+  border-radius: 0;
+}
+
+.notif-center-header {
+  padding: 0 4px 6px 4px;
+  border-bottom: 1px solid $fg-muted;
+  margin-bottom: 6px;
+}
+
+.notif-center-title {
+  font-weight: bold;
+  color: $fg;
+}
+
+.notif-center-clear {
+  background: transparent;
+  padding: 4px 8px;
+  border-radius: 0;
+  transition: background 100ms ease;
+}
+
+.notif-center-clear:hover {
+  background: $bg-dark;
+}
+
+.notif-center-scroll {
+  min-height: 200px;
+  max-height: 500px;
+}
+
+.notif-center-list {
+  padding: 4px 0;
+}
+
+.notif-center-list .notif-row {
+  background: $bg;
+  margin-bottom: 4px;
+}
+
+.notif-center-list .notif-row:hover {
+  background: $bg-dark;
+}
