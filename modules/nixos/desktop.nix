@@ -36,6 +36,8 @@
       # Nerd Fonts (monospace with icons)
       nerd-fonts._0xproto
       nerd-fonts.symbols-only
+      # Material Symbols (AGS shell icon system)
+      material-symbols
       # Noto fonts (Unicode coverage)
       noto-fonts
       noto-fonts-color-emoji

@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "astal-niri-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1765341517,
+        "narHash": "sha256-4WAab6GmBTjpkm1I6vaWAiFdnuDCo7wMXLegGCXbuSs=",
+        "owner": "sameoldlab",
+        "repo": "astal",
+        "rev": "8ebaca7f913ea2c1af48a5adb424a0122d4a8cb1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sameoldlab",
+        "ref": "feat/niri",
+        "repo": "astal",
+        "type": "github"
+      }
+    },
     "claude-code": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -115,6 +132,7 @@
     },
     "root": {
       "inputs": {
+        "astal-niri-src": "astal-niri-src",
         "claude-code": "claude-code",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
