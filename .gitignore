@@ -5,3 +5,4 @@ result*
 *.qcow2
 tests/libvirt-vm.xml
 plans
+.markdownlint-cli2.jsonc

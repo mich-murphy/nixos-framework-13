@@ -14,7 +14,7 @@ all: check build
 # ── Formatting / linting ─────────────────────────────────────────
 
 # Format all Nix files and eval-check the flake
-check: fmt eval
+check: fmt eval md-lint
 
 # Format all .nix files with alejandra
 fmt:
@@ -23,6 +23,14 @@ fmt:
 # Eval-only flake syntax check (no builds)
 eval:
     @{{silent}} "eval" nix flake check --no-build
+
+# Lint all Markdown files with markdownlint-cli2
+md-lint:
+    @{{silent}} "md-lint" nix run nixpkgs#markdownlint-cli2 -- "**/*.md"
+
+# Auto-fix Markdown lint issues where possible
+md-fix:
+    @{{silent}} "md-fix" nix run nixpkgs#markdownlint-cli2 -- --fix "**/*.md"
 
 # ── Builds ───────────────────────────────────────────────────────
 
@@ -36,19 +44,3 @@ build-system:
 # Full flake check (all checks — final gate before commit)
 flake-check:
     @{{silent}} "flake-check" nix flake check
-
-# ── Installation ─────────────────────────────────────────────────
-
-# Install NixOS to this machine via nixos-anywhere kexec (DESTRUCTIVE)
-install:
-    #!/usr/bin/env bash
-    set -euo pipefail
-    echo "WARNING: This will ERASE ALL DATA on /dev/nvme0n1"
-    read -p "Type 'yes' to continue: " confirm
-    [[ "$confirm" == "yes" ]] || { echo "Aborted."; exit 1; }
-    read -s -p "Enter LUKS passphrase for disk encryption: " luks_pass
-    echo
-    nix run github:nix-community/nixos-anywhere -- \
-      --flake .#p0ch1t4 \
-      --disk-encryption-keys /tmp/disk.key <(echo -n "$luks_pass") \
-      root@localhost
