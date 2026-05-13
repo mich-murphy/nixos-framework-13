@@ -38,7 +38,7 @@ function WifiSection() {
   const accessPoints = createBinding(wifi, "accessPoints");
 
   return (
-    <box vertical cssName="qs-toggle-section">
+    <box orientation={Gtk.Orientation.VERTICAL} cssName="qs-toggle-section">
       <button
         cssName="qs-toggle"
         cssClasses={enabled.as((on) =>
@@ -61,7 +61,7 @@ function WifiSection() {
         </box>
       </button>
       <revealer revealChild={open} transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}>
-        <box vertical cssName="qs-submenu">
+        <box orientation={Gtk.Orientation.VERTICAL} cssName="qs-submenu">
           <box cssName="qs-submenu-header">
             <label label="Wi-Fi" hexpand xalign={0} />
             <switch
@@ -72,7 +72,7 @@ function WifiSection() {
               }}
             />
           </box>
-          <box vertical cssName="qs-submenu-list">
+          <box orientation={Gtk.Orientation.VERTICAL} cssName="qs-submenu-list">
             <For each={accessPoints.as((aps) => [...(aps ?? [])].sort((a, b) => b.strength - a.strength).slice(0, 8))}>
               {(ap: any) => (
                 <button
@@ -104,7 +104,7 @@ function BluetoothSection() {
   const devices = createBinding(bt, "devices");
 
   return (
-    <box vertical cssName="qs-toggle-section">
+    <box orientation={Gtk.Orientation.VERTICAL} cssName="qs-toggle-section">
       <button
         cssName="qs-toggle"
         cssClasses={powered.as((on) =>
@@ -121,7 +121,7 @@ function BluetoothSection() {
         </box>
       </button>
       <revealer revealChild={open} transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}>
-        <box vertical cssName="qs-submenu">
+        <box orientation={Gtk.Orientation.VERTICAL} cssName="qs-submenu">
           <box cssName="qs-submenu-header">
             <label label="Bluetooth" hexpand xalign={0} />
             <switch
@@ -132,7 +132,7 @@ function BluetoothSection() {
               }}
             />
           </box>
-          <box vertical cssName="qs-submenu-list">
+          <box orientation={Gtk.Orientation.VERTICAL} cssName="qs-submenu-list">
             <For each={devices.as((ds) => [...(ds ?? [])].filter((d: any) => d.paired || d.connected))}>
               {(dev: any) => (
                 <button
@@ -170,7 +170,7 @@ function PowerProfileSection() {
   const profiles = createBinding(pp, "profiles");
 
   return (
-    <box vertical cssName="qs-toggle-section">
+    <box orientation={Gtk.Orientation.VERTICAL} cssName="qs-toggle-section">
       <button
         cssName="qs-toggle"
         cssClasses={["qs-toggle", "active"]}
@@ -190,8 +190,8 @@ function PowerProfileSection() {
         </box>
       </button>
       <revealer revealChild={open} transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}>
-        <box vertical cssName="qs-submenu">
-          <box vertical cssName="qs-submenu-list">
+        <box orientation={Gtk.Orientation.VERTICAL} cssName="qs-submenu">
+          <box orientation={Gtk.Orientation.VERTICAL} cssName="qs-submenu-list">
             <For each={profiles.as((ps: any) => [...(ps ?? [])])}>
               {(p: any) => (
                 <button
@@ -330,20 +330,20 @@ function MprisSection() {
 
   return (
     <revealer revealChild={visible} transitionType={Gtk.RevealerTransitionType.SLIDE_DOWN}>
-      <box vertical>
+      <box orientation={Gtk.Orientation.VERTICAL}>
         <Divider />
         <box cssName="qs-mpris" spacing={8}>
           <box cssName="qs-mpris-art">
-            {/* TODO(agent-B-renames): coverArt may be art_url; using fallback Gtk.Picture-as-box with file binding */}
-            <picture
+            <image
               cssName="qs-mpris-cover"
               file={players.as((ps) => {
                 const p = pickPlayer(ps as any);
-                return p?.coverArt ?? null;
+                return p?.coverArt ?? "";
               })}
+              pixelSize={48}
             />
           </box>
-          <box vertical hexpand>
+          <box orientation={Gtk.Orientation.VERTICAL} hexpand>
             <label
               cssName="qs-mpris-title"
               label={players.as((ps) => pickPlayer(ps as any)?.title ?? "")}
@@ -440,7 +440,7 @@ export default function QuickSettings() {
         });
       }}
     >
-      <box vertical cssName="qs-panel" spacing={6}>
+      <box orientation={Gtk.Orientation.VERTICAL} cssName="qs-panel" spacing={6}>
         <box cssName="qs-toggles" spacing={6} homogeneous>
           <WifiSection />
           <BluetoothSection />

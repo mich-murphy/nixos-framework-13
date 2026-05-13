@@ -1,6 +1,6 @@
 // TODO(integration): style.scss must @import "./styles/notifications".
 import App from "ags/gtk4/app";
-import { Astal } from "ags/gtk4";
+import { Astal, Gtk } from "ags/gtk4";
 import { For } from "ags";
 import { timeout } from "ags/time";
 import { notifications, type Notification } from "../../services/notifications";
@@ -43,8 +43,9 @@ export default function Popups() {
       marginTop={12}
       marginRight={12}
       application={App}
+      visible
     >
-      <box vertical cssName="notif-popups" spacing={6}>
+      <box orientation={Gtk.Orientation.VERTICAL} cssName="notif-popups" spacing={6}>
         <For each={popups.as((ns) => (ns ?? []).slice(-3))}>
           {(n: Notification) => {
             schedule(n);

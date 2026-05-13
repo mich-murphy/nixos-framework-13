@@ -12,7 +12,7 @@ export default function Tray() {
           <menubutton
             tooltipMarkup={item.tooltipMarkup}
             menuModel={item.menuModel}
-            actionGroup={["dbusmenu", item.actionGroup]}
+            $={(self: any) => self.insert_action_group("dbusmenu", item.actionGroup)}
           >
             <image gicon={item.gicon} pixelSize={16} />
           </menubutton>

@@ -1,6 +1,6 @@
 // TODO(integration): style.scss must @import "./styles/notifications".
 import App from "ags/gtk4/app";
-import { Astal } from "ags/gtk4";
+import { Astal, Gtk } from "ags/gtk4";
 import { For } from "ags";
 import { notifications, type Notification } from "../../services/notifications";
 import NotificationRow from "./notification";
@@ -27,7 +27,7 @@ export default function NotificationCenter() {
       visible={empty.as((e) => !e)}
       application={App}
     >
-      <box vertical cssName="notif-center" spacing={6}>
+      <box orientation={Gtk.Orientation.VERTICAL} cssName="notif-center" spacing={6}>
         <box cssName="notif-center-header" spacing={6}>
           <label cssName="notif-center-title" label="Notifications" hexpand xalign={0} />
           <button
@@ -38,7 +38,7 @@ export default function NotificationCenter() {
           </button>
         </box>
         <scrolledwindow cssName="notif-center-scroll" hexpand vexpand>
-          <box vertical cssName="notif-center-list" spacing={4}>
+          <box orientation={Gtk.Orientation.VERTICAL} cssName="notif-center-list" spacing={4}>
             <For each={sliced}>
               {(n: Notification) => (
                 <NotificationRow

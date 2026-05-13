@@ -60,7 +60,7 @@ export default function NotificationRow({ notification, onDismiss }: Props) {
             <label cssName="icon notif-fallback-icon" label="info" />
           )}
         </box>
-        <box vertical hexpand cssName="notif-text">
+        <box orientation={Gtk.Orientation.VERTICAL} hexpand cssName="notif-text">
           <box cssName="notif-header" spacing={6}>
             <label
               cssName="notif-title"

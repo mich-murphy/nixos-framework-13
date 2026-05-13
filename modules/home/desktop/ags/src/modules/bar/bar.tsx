@@ -16,6 +16,7 @@ export default function Bar(monitor: Gdk.Monitor) {
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={TOP | LEFT | RIGHT}
       application={App}
+      visible
     >
       <centerbox cssName="bar-content">
         <box halign={Gtk.Align.START} spacing={4}>

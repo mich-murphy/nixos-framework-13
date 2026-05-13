@@ -9,6 +9,7 @@
 
   astalNiri = astal-niri.packages.${system};
   astalDeps = with astalNiri; [
+    astal4
     niri
     battery
     bluetooth
