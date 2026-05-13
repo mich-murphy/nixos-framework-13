@@ -11,7 +11,6 @@
     ./desktop/waybar.nix
     ./desktop/mako.nix
     ./desktop/rofi.nix
-    ./desktop/ags.nix
     ./desktop/hyprlock.nix
     ./desktop/hypridle.nix
     ./desktop/gtk.nix

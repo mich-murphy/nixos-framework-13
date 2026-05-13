@@ -34,8 +34,6 @@
     packages = builtins.attrValues {
       # Nerd Fonts (monospace with icons)
       inherit (pkgs.nerd-fonts) _0xproto symbols-only;
-      # Material Symbols (AGS shell icon system)
-      inherit (pkgs) material-symbols;
       # Noto fonts (Unicode coverage)
       inherit (pkgs) noto-fonts noto-fonts-color-emoji;
       # Microsoft-compatible fonts

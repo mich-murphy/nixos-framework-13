@@ -21,16 +21,6 @@
       flake = false;
     };
 
-    astal-niri = {
-      url = "github:sameoldlab/astal/feat/niri";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    ags = {
-      url = "github:aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     claude-code = {
       url = "github:sadjow/claude-code-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,8 +34,6 @@
     nixos-hardware,
     firefox-addons,
     tokyonight-nvim,
-    astal-niri,
-    ags,
     claude-code,
     ...
   }: {
@@ -76,7 +64,7 @@
           ];
           home-manager.extraSpecialArgs = {
             colors = import ./theme/tokyonight.nix;
-            inherit tokyonight-nvim astal-niri ags;
+            inherit tokyonight-nvim;
           };
           home-manager.users.michael = import ./modules/home;
         }
