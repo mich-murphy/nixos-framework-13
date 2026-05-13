@@ -1,7 +1,9 @@
 // TODO(integration): style.scss must @import "./styles/quicksettings" and "./styles/notifications".
-import { App, Astal, Gtk } from "ags/gtk4";
+import App from "ags/gtk4/app";
+import { Astal, Gtk } from "ags/gtk4";
 import { createBinding, createState, For } from "ags";
-import { execAsync, interval } from "ags/time";
+import { execAsync } from "ags/process";
+import { interval } from "ags/time";
 import AstalNetwork from "gi://AstalNetwork";
 import AstalBluetooth from "gi://AstalBluetooth";
 import AstalPowerProfiles from "gi://AstalPowerProfiles";

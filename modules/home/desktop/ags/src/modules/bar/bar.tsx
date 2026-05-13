@@ -1,4 +1,5 @@
-import { App, Astal, Gtk, Gdk } from "ags/gtk4";
+import App from "ags/gtk4/app";
+import { Astal, Gtk, Gdk } from "ags/gtk4";
 import Workspaces from "./items/workspaces";
 import Clock from "./items/clock";
 import SysStats from "./items/sysstats";

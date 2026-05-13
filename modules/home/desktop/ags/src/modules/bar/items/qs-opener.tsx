@@ -1,4 +1,4 @@
-import { App } from "ags/gtk4";
+import App from "ags/gtk4/app";
 import { createBinding } from "ags";
 import AstalNetwork from "gi://AstalNetwork";
 import AstalBluetooth from "gi://AstalBluetooth";

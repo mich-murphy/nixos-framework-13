@@ -1,5 +1,6 @@
 // TODO(integration): style.scss must @import "./styles/notifications".
-import { App, Astal } from "ags/gtk4";
+import App from "ags/gtk4/app";
+import { Astal } from "ags/gtk4";
 import { For } from "ags";
 import { notifications, type Notification } from "../../services/notifications";
 import NotificationRow from "./notification";

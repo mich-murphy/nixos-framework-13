@@ -1,4 +1,4 @@
-import { App } from "ags/gtk4";
+import App from "ags/gtk4/app";
 import "./style.scss";
 import Bar from "./modules/bar/bar";
 import QuickSettings from "./modules/quicksettings/quicksettings";
