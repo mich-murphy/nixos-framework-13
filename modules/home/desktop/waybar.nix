@@ -9,7 +9,7 @@
   };
 
   programs.waybar = {
-    enable = true;
+    enable = false;
     systemd.enable = true;
     settings = {
       mainBar = {
@@ -103,7 +103,6 @@
           tooltip-format = "{device_enumerate}";
           tooltip-format-enumerate-connected = "{device_alias}";
           tooltip-format-enumerate-connected-battery = "{device_alias}\t {device_battery_percentage}%";
-          on-click-right = "blueman-manager";
         };
 
         tray = {
