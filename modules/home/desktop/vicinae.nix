@@ -16,6 +16,36 @@
         dark.name = "tokyonight";
         light.name = "tokyonight";
       };
+
+      font.normal.family = "0xProto Nerd Font";
+
+      launcher_window.client_side_decorations.enabled = true;
+
+      providers = {
+        "browser-extension".enabled = false;
+
+        core.entrypoints = {
+          about.enabled = false;
+          documentation.enabled = false;
+          "list-extensions".enabled = false;
+          "manage-fallback".enabled = false;
+          "open-config-file".enabled = false;
+          "open-default-config".enabled = false;
+          "refresh-apps".enabled = true;
+          "report-bug".enabled = false;
+          sponsor.enabled = false;
+          store.enabled = true;
+        };
+
+        developer.entrypoints.create.enabled = false;
+
+        "manage-shortcuts".entrypoints = {
+          create.enabled = false;
+          manage.enabled = false;
+        };
+
+        wm.entrypoints."switch-windows".enabled = false;
+      };
     };
 
     themes.tokyonight = {
