@@ -1,4 +1,8 @@
-{colors, ...}: {
+{
+  colors,
+  pkgs,
+  ...
+}: {
   programs.mpv = {
     enable = true;
   };
@@ -56,134 +60,125 @@
     enable = true;
     enableFishIntegration = true;
     shellWrapperName = "y";
+
+    extraPackages = with pkgs; [
+      ffmpegthumbnailer
+      imagemagick
+      poppler-utils
+      mediainfo
+      unar
+      jq
+    ];
+
+    settings = {
+      mgr = {
+        show_hidden = false;
+        sort_by = "natural";
+        sort_dir_first = true;
+        linemode = "size";
+      };
+      preview = {
+        max_width = 1000;
+        max_height = 1000;
+      };
+      opener = {
+        edit = [
+          {
+            run = ''nvim "$@"'';
+            block = true;
+          }
+        ];
+      };
+      open.prepend_rules = [
+        {
+          name = "*.md";
+          use = "edit";
+        }
+      ];
+      plugin.prepend_fetchers = [
+        {
+          id = "git";
+          name = "*";
+          run = "git";
+        }
+        {
+          id = "git";
+          name = "*/";
+          run = "git";
+        }
+      ];
+    };
+
+    keymap.mgr.prepend_keymap = [
+      {
+        on = ["g" "h"];
+        run = "cd ~";
+        desc = "Go home";
+      }
+      {
+        on = ["g" "c"];
+        run = "cd ~/.config";
+        desc = "Go to ~/.config";
+      }
+      {
+        on = ["g" "n"];
+        run = "cd ~/nixos";
+        desc = "Go to ~/nixos";
+      }
+      {
+        on = ["g" "/"];
+        run = "cd /";
+        desc = "Go to /";
+      }
+      {
+        on = "<C-n>";
+        run = ''shell "nvim $0" --block'';
+        desc = "Open in nvim";
+      }
+      {
+        on = "<C-g>";
+        run = "plugin lazygit";
+        desc = "Open lazygit";
+      }
+      {
+        on = "<Enter>";
+        run = "plugin smart-enter";
+        desc = "Enter or open";
+      }
+      {
+        on = "l";
+        run = "plugin smart-enter";
+        desc = "Enter or open";
+      }
+      {
+        on = "p";
+        run = "plugin smart-paste";
+        desc = "Smart paste into hovered dir";
+      }
+      {
+        on = "?";
+        run = "help";
+        desc = "Show keymap help";
+      }
+    ];
+
+    plugins = {
+      smart-enter = pkgs.yaziPlugins.smart-enter;
+      smart-paste = pkgs.yaziPlugins.smart-paste;
+      lazygit = pkgs.yaziPlugins.lazygit;
+      git = {
+        package = pkgs.yaziPlugins.git;
+        setup = true;
+      };
+    };
+
+    flavors.tokyo-night = pkgs.fetchFromGitHub {
+      owner = "BennyOe";
+      repo = "tokyo-night.yazi";
+      rev = "8e6296f14daff24151c736ebd0b9b6cd89b02b03";
+      hash = "sha256-LArhRteD7OQRBguV1n13gb5jkl90sOxShkDzgEf3PA0=";
+    };
+
+    theme.flavor.dark = "tokyo-night";
   };
-
-  xdg.configFile."yazi/theme.toml".text = ''
-    [mgr]
-    cwd = { fg = "${colors.fg_dark}", italic = true }
-
-    hovered         = { bg = "${colors.bg1}" }
-    preview_hovered = { bg = "${colors.bg1}" }
-
-    find_keyword  = { fg = "${colors.bg_dark}", bg = "${colors.orange}", bold = true }
-    find_position = { fg = "${colors.blue2}", bg = "#192b38", bold = true }
-
-    marker_copied   = { fg = "${colors.green}", bg = "${colors.green}" }
-    marker_cut      = { fg = "${colors.red}", bg = "${colors.red}" }
-    marker_marked   = { fg = "${colors.purple}", bg = "${colors.purple}" }
-    marker_selected = { fg = "${colors.blue}", bg = "${colors.blue}" }
-
-    count_copied   = { fg = "${colors.bg_dark}", bg = "${colors.green}" }
-    count_cut      = { fg = "${colors.bg_dark}", bg = "${colors.red}" }
-    count_selected = { fg = "${colors.bg_dark}", bg = "${colors.blue}" }
-
-    border_symbol = "│"
-    border_style  = { fg = "${colors.teal}" }
-
-    [tabs]
-    active   = { fg = "${colors.bg_dark}", bg = "${colors.blue}" }
-    inactive = { fg = "${colors.blue}", bg = "${colors.fg_gutter}" }
-
-    [mode]
-    normal_main = { fg = "${colors.bg_dark}", bg = "${colors.blue}", bold = true }
-    normal_alt  = { fg = "${colors.blue}", bg = "${colors.fg_gutter}" }
-
-    select_main = { fg = "${colors.bg_dark}", bg = "${colors.purple}", bold = true }
-    select_alt  = { fg = "${colors.purple}", bg = "${colors.fg_gutter}" }
-
-    unset_main  = { fg = "${colors.bg_dark}", bg = "${colors.purple0}", bold = true }
-    unset_alt   = { fg = "${colors.purple0}", bg = "${colors.fg_gutter}" }
-
-    [status]
-    overall   = { fg = "${colors.fg}", bg = "${colors.bg_dark}" }
-    sep_left  = { open = "", close = "" }
-    sep_right = { open = "", close = "" }
-
-    progress_label  = { fg = "${colors.fg}", bold = true }
-    progress_normal = { fg = "${colors.blue0}", bg = "${colors.bg1}" }
-    progress_error  = { fg = "${colors.red1}", bg = "${colors.bg1}" }
-
-    perm_type  = { fg = "${colors.blue}" }
-    perm_read  = { fg = "${colors.yellow}" }
-    perm_write = { fg = "${colors.red}" }
-    perm_exec  = { fg = "${colors.green}" }
-    perm_sep   = { fg = "${colors.bg3}" }
-
-    [pick]
-    border   = { fg = "${colors.teal}" }
-    active   = { fg = "${colors.fg}",  bg = "${colors.bg2}" }
-    inactive = { fg = "${colors.fg}" }
-
-    [input]
-    border   = { fg = "${colors.blue2}" }
-    title    = { fg = "${colors.blue2}" }
-    value    = { fg = "${colors.purple0}" }
-    selected = { bg = "${colors.bg2}" }
-
-    [cmp]
-    border   = { fg = "${colors.blue2}" }
-    active   = { fg = "${colors.fg}", bg = "#343a55" }
-    inactive = { fg = "${colors.fg}" }
-
-    icon_file    = ""
-    icon_folder  = ""
-    icon_command = ""
-
-    [tasks]
-    border  = { fg = "${colors.teal}" }
-    title   = { fg = "${colors.teal}" }
-    hovered = { fg = "${colors.fg}", bg = "${colors.bg2}" }
-
-    [which]
-    cols            = 3
-    mask            = { bg = "${colors.bg_dark}" }
-    cand            = { fg = "${colors.aqua}" }
-    rest            = { fg = "${colors.blue}" }
-    desc            = { fg = "${colors.purple}" }
-    separator       = " ➜ "
-    separator_style = { fg = "${colors.comment}" }
-
-    [confirm]
-    border  = { fg = "${colors.blue2}" }
-    title   = { fg = "${colors.teal}" }
-    content = {}
-    list    = {}
-    btn_yes = { bg = "${colors.bg2}" }
-    btn_no  = {}
-    btn_labels = [ "  [Y]es  ", "  (N)o  " ]
-
-    [spot]
-    border  = { fg = "${colors.teal}" }
-    title   = { fg = "${colors.teal}" }
-
-    [notify]
-    title_info  = { fg = "${colors.blue2}" }
-    title_warn  = { fg = "${colors.yellow}" }
-    title_error = { fg = "${colors.red1}" }
-
-    icon_error = ""
-    icon_warn = ""
-    icon_info = ""
-
-    [help]
-    on      = { fg = "${colors.green}" }
-    run     = { fg = "${colors.purple}" }
-    desc    = { fg = "${colors.aqua}" }
-    hovered = { bg = "${colors.bg1}" }
-    footer  = { fg = "${colors.fg}", bg = "${colors.bg}" }
-
-    [filetype]
-
-    rules = [
-    	{ mime = "image/*", fg = "${colors.yellow}" },
-    	{ mime = "{audio,video}/*", fg = "${colors.purple}" },
-    	{ mime = "application/*zip", fg = "${colors.red}" },
-    	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "${colors.red}" },
-    	{ mime = "application/{pdf,doc,rtf,vnd.*}", fg = "${colors.aqua}" },
-    	{ name = "*", is = "orphan", bg = "${colors.red}" },
-    	{ name = "*", is = "exec"  , fg = "${colors.green}" },
-    	{ name = "*/", fg = "${colors.blue}" },
-    	{ name = "*", fg = "${colors.fg}" }
-    ]
-  '';
 }
