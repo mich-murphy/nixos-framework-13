@@ -18,7 +18,7 @@
         "video/mp4" = "mpv.desktop";
         "video/x-matroska" = "mpv.desktop";
         "audio/mpeg" = "mpv.desktop";
-        "inode/directory" = "org.kde.dolphin.desktop";
+        "inode/directory" = "org.gnome.Nautilus.desktop";
       };
     };
   };

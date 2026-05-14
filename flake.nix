@@ -25,6 +25,11 @@
       url = "github:sadjow/claude-code-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    vicinae = {
+      url = "github:vicinaehq/vicinae";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -35,6 +40,7 @@
     firefox-addons,
     tokyonight-nvim,
     claude-code,
+    vicinae,
     ...
   }: {
     nixosConfigurations.p0ch1t4 = nixpkgs.lib.nixosSystem {
@@ -64,7 +70,7 @@
           ];
           home-manager.extraSpecialArgs = {
             colors = import ./theme/tokyonight.nix;
-            inherit tokyonight-nvim;
+            inherit tokyonight-nvim vicinae;
           };
           home-manager.users.michael = import ./modules/home;
         }

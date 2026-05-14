@@ -116,9 +116,20 @@ in {
     // Window & layer rules
     // ============================================================
 
+    // Firefox: open column maximized (full monitor width — niri-side,
+    // sidesteps Firefox's session-restore fighting open-fullscreen) and
+    // clip-to-geometry so Firefox's 1 px dark border doesn't obscure
+    // niri's focus-ring (per niri FAQ).
+    window-rule {
+        match app-id="firefox"
+        open-maximized true
+        clip-to-geometry true
+    }
+
     window-rule {
         match app-id="firefox" title="^Picture-in-Picture$"
         open-floating true
+        open-maximized false
     }
 
     window-rule {
@@ -156,7 +167,7 @@ in {
     // Tray & system services
     spawn-at-startup "udiskie"
     spawn-sh-at-startup "${polkitAgent} &"
-    spawn-sh-at-startup "nm-applet --indicator"
+    // spawn-sh-at-startup "nm-applet --indicator"
 
     // ============================================================
     // Key bindings
@@ -176,9 +187,9 @@ in {
         // --- Applications ---
         Mod+Return       hotkey-overlay-title="Open a Terminal: wezterm"     { spawn "wezterm"; }
         Mod+Shift+Return hotkey-overlay-title="Open a Browser: firefox"      { spawn "firefox"; }
-        Mod+E            hotkey-overlay-title="Open a File Browser: dolphin" { spawn "dolphin"; }
-        Mod+Space        hotkey-overlay-title="Run an Application: rofi"     { spawn-sh "pkill rofi || rofi -show drun -theme ~/.local/share/rofi/minimal.rasi"; }
-        Mod+Shift+C      hotkey-overlay-title="Run a Calculator: rofi"       { spawn-sh "pkill rofi || rofi -show calc -modi calc -no-show-match -no-sort -calc-command \"echo -n '{result}' | wl-copy\" -theme ~/.local/share/rofi/minimal.rasi"; }
+        Mod+E            hotkey-overlay-title="Open a File Browser: nautilus" { spawn "nautilus"; }
+        Mod+Space        hotkey-overlay-title="Run an Application: vicinae"  { spawn "vicinae" "vicinae://toggle"; }
+        Mod+Shift+Space  hotkey-overlay-title="Clipboard History: vicinae"   { spawn "vicinae" "vicinae://launch/clipboard/history"; }
 
         // --- Media & brightness ---
         XF86AudioRaiseVolume  allow-when-locked=true hotkey-overlay-title=null { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }

@@ -2,7 +2,7 @@
   home.packages = [
     pkgs.obsidian
     pkgs.zotero
-    pkgs.kdePackages.dolphin
+    pkgs.nautilus
     pkgs.gimp
     # owncloud-client 6.x reads QT_STYLE_OVERRIDE and calls
     # QQuickStyle::setStyle() with it, but adwaita-qt6 ships no

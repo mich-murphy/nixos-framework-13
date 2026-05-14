@@ -8,6 +8,10 @@
       name = "Tokyonight-Dark";
       package = pkgs.tokyonight-gtk-theme;
     };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = pkgs.papirus-icon-theme;
+    };
     cursorTheme = {
       name = "Bibata-Modern-Classic";
       package = pkgs.bibata-cursors;

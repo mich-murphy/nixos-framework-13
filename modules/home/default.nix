@@ -10,7 +10,7 @@
     ./desktop/niri.nix
     ./desktop/waybar.nix
     ./desktop/mako.nix
-    ./desktop/rofi.nix
+    ./desktop/vicinae.nix
     ./desktop/hyprlock.nix
     ./desktop/hypridle.nix
     ./desktop/gtk.nix
