@@ -6,6 +6,40 @@
 }: {
   imports = [vicinae.homeManagerModules.default];
 
+  xdg.dataFile."vicinae/scripts/keep-awake.sh" = {
+    executable = true;
+    text = ''
+      #!${pkgs.bash}/bin/bash
+      # @vicinae.schemaVersion 1
+      # @vicinae.title Toggle Keep Awake
+      # @vicinae.description Inhibit screen idle and lock timers until toggled off
+      # @vicinae.mode silent
+      # @vicinae.icon ☕
+      # @vicinae.exec ["${pkgs.bash}/bin/bash"]
+
+      set -u
+      pidfile="''${XDG_RUNTIME_DIR:-/tmp}/vicinae-keep-awake.pid"
+      notify=${pkgs.libnotify}/bin/notify-send
+
+      if [ -f "$pidfile" ] && pid=$(cat "$pidfile") && kill -0 "$pid" 2>/dev/null; then
+        kill "$pid"
+        rm -f "$pidfile"
+        "$notify" -a "Keep Awake" -i system-suspend "Keep awake: off" "Idle and lock timers restored."
+      else
+        rm -f "$pidfile"
+        ${pkgs.systemd}/bin/systemd-inhibit \
+          --what=idle \
+          --who=Vicinae \
+          --why="Keep awake toggle" \
+          --mode=block \
+          ${pkgs.coreutils}/bin/sleep infinity </dev/null >/dev/null 2>&1 &
+        echo $! > "$pidfile"
+        disown
+        "$notify" -a "Keep Awake" -i system-run "Keep awake: on" "Screen will stay awake until toggled off."
+      fi
+    '';
+  };
+
   services.vicinae = {
     enable = true;
     package = pkgs.vicinae;
