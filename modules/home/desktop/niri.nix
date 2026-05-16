@@ -3,7 +3,7 @@
   colors,
   ...
 }: let
-  polkitAgent = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1";
+  polkitAgent = "${pkgs.soteria}/bin/soteria";
   wallpaper = ../../../assets/wallpapers/evangelion-01.png;
 
   arrangeOutputs = pkgs.writeShellApplication {
@@ -161,8 +161,7 @@ in {
     spawn-at-startup "${watchOutputs}/bin/niri-watch-outputs"
 
     // Wallpaper
-    spawn-at-startup "awww-daemon"
-    spawn-sh-at-startup "sleep 0.5 && awww img ${wallpaper}"
+    spawn-at-startup "swaybg" "-i" "${wallpaper}" "-m" "fill"
 
     // Tray & system services
     spawn-at-startup "udiskie"
@@ -301,7 +300,6 @@ in {
   '';
 
   home.packages = builtins.attrValues {
-    inherit (pkgs) awww udiskie networkmanagerapplet pavucontrol playerctl wl-clipboard grim slurp xwayland-satellite;
-    inherit (pkgs.kdePackages) polkit-kde-agent-1;
+    inherit (pkgs) swaybg udiskie networkmanagerapplet pavucontrol playerctl wl-clipboard grim slurp xwayland-satellite soteria;
   };
 }

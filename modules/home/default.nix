@@ -12,7 +12,7 @@
     ./desktop/mako.nix
     ./desktop/vicinae.nix
     ./desktop/hyprlock.nix
-    ./desktop/hypridle.nix
+    ./desktop/swayidle.nix
     ./desktop/gtk.nix
     ./firefox.nix
     ./apps.nix
