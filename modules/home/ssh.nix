@@ -10,21 +10,21 @@
       MACs = "hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com";
     };
 
-    matchBlocks = {
+    settings = {
       "github.com" = {
-        user = "git";
-        identityFile = "~/.ssh/id_ed25519";
+        User = "git";
+        IdentityFile = "~/.ssh/id_ed25519";
       };
 
       "*" = {
-        addKeysToAgent = "yes";
-        hashKnownHosts = true;
-        serverAliveInterval = 60;
-        serverAliveCountMax = 3;
-        identitiesOnly = true;
-        forwardAgent = false;
-        forwardX11 = false;
-        forwardX11Trusted = false;
+        AddKeysToAgent = "yes";
+        HashKnownHosts = true;
+        ServerAliveInterval = 60;
+        ServerAliveCountMax = 3;
+        IdentitiesOnly = true;
+        ForwardAgent = false;
+        ForwardX11 = false;
+        ForwardX11Trusted = false;
       };
     };
   };

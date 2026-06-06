@@ -14,7 +14,6 @@
       guioptions = "";
       adjust-open = "best-fit";
       scroll-page-aware = true;
-      sandbox = "none";
       statusbar-h-padding = 0;
       statusbar-v-padding = 0;
       selection-clipboard = "clipboard";
