@@ -4,6 +4,7 @@
     pkgs.zotero
     pkgs.nautilus
     pkgs.gimp
+    pkgs.codex
     # owncloud-client 6.x reads QT_STYLE_OVERRIDE and calls
     # QQuickStyle::setStyle() with it, but adwaita-qt6 ships no
     # QtQuick.Controls 2 module — startup dialog shows
