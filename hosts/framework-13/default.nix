@@ -15,8 +15,5 @@
     ../../modules/nixos/security.nix
     ../../modules/nixos/users.nix
   ];
-
-  nixpkgs.hostPlatform = "x86_64-linux";
-
   system.stateVersion = "25.05";
 }

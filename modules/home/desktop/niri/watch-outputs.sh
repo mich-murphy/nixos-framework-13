@@ -6,6 +6,7 @@
 set -uo pipefail
 
 while true; do
+    niri-arrange-outputs >/dev/null 2>&1 || true
     while IFS= read -r event; do
         if [[ "$event" == *Output* ]]; then
             niri-arrange-outputs >/dev/null 2>&1 || true

@@ -1,11 +1,8 @@
 {
   pkgs,
   colors,
-  vicinae,
   ...
 }: {
-  imports = [vicinae.homeManagerModules.default];
-
   xdg.dataFile."vicinae/scripts/keep-awake.sh" = {
     executable = true;
     text = ''
@@ -17,32 +14,29 @@
       # @vicinae.icon ☕
       # @vicinae.exec ["${pkgs.bash}/bin/bash"]
 
-      set -u
-      pidfile="''${XDG_RUNTIME_DIR:-/tmp}/vicinae-keep-awake.pid"
+      set -eu
+      systemctl=${pkgs.systemd}/bin/systemctl
       notify=${pkgs.libnotify}/bin/notify-send
 
-      if [ -f "$pidfile" ] && pid=$(cat "$pidfile") && kill -0 "$pid" 2>/dev/null; then
-        kill "$pid"
-        rm -f "$pidfile"
+      if "$systemctl" --user is-active --quiet vicinae-keep-awake.service; then
+        "$systemctl" --user stop vicinae-keep-awake.service
         "$notify" -a "Keep Awake" -i system-suspend "Keep awake: off" "Idle and lock timers restored."
       else
-        rm -f "$pidfile"
-        ${pkgs.systemd}/bin/systemd-inhibit \
-          --what=idle \
-          --who=Vicinae \
-          --why="Keep awake toggle" \
-          --mode=block \
-          ${pkgs.coreutils}/bin/sleep infinity </dev/null >/dev/null 2>&1 &
-        echo $! > "$pidfile"
-        disown
+        "$systemctl" --user start vicinae-keep-awake.service
         "$notify" -a "Keep Awake" -i system-run "Keep awake: on" "Screen will stay awake until toggled off."
       fi
     '';
   };
 
-  services.vicinae = {
+  systemd.user.services.vicinae-keep-awake = {
+    Unit.Description = "Vicinae keep-awake inhibitor";
+    Service.ExecStart = "${pkgs.systemd}/bin/systemd-inhibit --what=idle --who=Vicinae --why=\"Keep awake toggle\" --mode=block ${pkgs.coreutils}/bin/sleep infinity";
+  };
+
+  programs.vicinae = {
     enable = true;
     package = pkgs.vicinae;
+    enableFirefoxIntegration = false;
     systemd.enable = true;
 
     settings = {

@@ -4,7 +4,7 @@
   ...
 }: let
   polkitAgent = "${pkgs.soteria}/bin/soteria";
-  wallpaper = ../../../assets/wallpapers/evangelion-01.png;
+  wallpaper = ../../../assets/wallpapers/delorean.png;
 
   arrangeOutputs = pkgs.writeShellApplication {
     name = "niri-arrange-outputs";
@@ -19,14 +19,6 @@
   };
 in {
   xdg.configFile."niri/config.kdl".text = ''
-    // ============================================================
-    // Environment & input
-    // ============================================================
-
-    environment {
-      GTK_THEME "Tokyonight-Dark"
-    }
-
     input {
         keyboard {
             repeat-delay 300
@@ -46,8 +38,8 @@ in {
     // Outputs
     // ============================================================
 
-    // Output positions are managed at runtime by niri-arrange-outputs
-    // (spawn-at-startup below). External monitors stack above eDP-1.
+    // Output positions are managed at runtime by niri-watch-outputs.
+    // External monitors stack above eDP-1.
     output "eDP-1" {
         focus-at-startup
         mode "2880x1920@120.000"
@@ -142,22 +134,11 @@ in {
         block-out-from "screen-capture"
     }
 
-    layer-rule {
-        match namespace="^waybar$"
-        geometry-corner-radius 12
-        shadow {
-            on
-            softness 40
-            spread 5
-        }
-    }
-
     // ============================================================
     // Startup
     // ============================================================
 
     // Output arrangement
-    spawn-at-startup "${arrangeOutputs}/bin/niri-arrange-outputs"
     spawn-at-startup "${watchOutputs}/bin/niri-watch-outputs"
 
     // Wallpaper
@@ -165,8 +146,7 @@ in {
 
     // Tray & system services
     spawn-at-startup "udiskie"
-    spawn-sh-at-startup "${polkitAgent} &"
-    // spawn-sh-at-startup "nm-applet --indicator"
+    spawn-at-startup "${polkitAgent}"
 
     // ============================================================
     // Key bindings
@@ -300,6 +280,6 @@ in {
   '';
 
   home.packages = builtins.attrValues {
-    inherit (pkgs) swaybg udiskie networkmanagerapplet pavucontrol playerctl wl-clipboard grim slurp xwayland-satellite soteria;
+    inherit (pkgs) swaybg udiskie pavucontrol playerctl wl-clipboard xwayland-satellite soteria;
   };
 }

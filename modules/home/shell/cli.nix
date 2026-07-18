@@ -24,8 +24,6 @@
     enable = true;
     enableFishIntegration = true;
     defaultCommand = "fd --type f --hidden --exclude .git";
-    fileWidgetCommand = "fd --type f --hidden --exclude .git";
-    changeDirWidgetCommand = "fd --type d --hidden --exclude .git";
     defaultOptions = [
       "--highlight-line"
       "--info=inline-right"
@@ -55,15 +53,21 @@
       "--color=separator:${colors.orange}"
       "--color=spinner:${colors.magenta}"
     ];
-    fileWidgetOptions = [
-      "--preview='bat --color=always {}'"
-      "--preview-window=~2,border-none"
-    ];
-    changeDirWidgetOptions = [
-      "--preview='tree -C {} | head -n 10'"
-      "--preview-window=border-none"
-    ];
-    historyWidgetOptions = [
+    fileWidget = {
+      command = "fd --type f --hidden --exclude .git";
+      options = [
+        "--preview='bat --color=always {}'"
+        "--preview-window=~2,border-none"
+      ];
+    };
+    changeDirWidget = {
+      command = "fd --type d --hidden --exclude .git";
+      options = [
+        "--preview='tree -C {} | head -n 10'"
+        "--preview-window=border-none"
+      ];
+    };
+    historyWidget.options = [
       "--preview-window=border-none"
     ];
   };

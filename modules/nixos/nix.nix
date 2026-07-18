@@ -15,32 +15,4 @@
       options = "--delete-older-than 7d";
     };
   };
-
-  system.autoUpgrade = {
-    enable = true;
-    flake = "/home/michael/nixos#p0ch1t4";
-    dates = "Sun 04:40";
-    randomizedDelaySec = "2h";
-    fixedRandomDelay = true;
-    persistent = true;
-    allowReboot = false;
-    upgrade = false;
-    flags = [
-      "--no-write-lock-file"
-      "--update-input"
-      "nixpkgs"
-      "--update-input"
-      "home-manager"
-      "--update-input"
-      "nixos-hardware"
-      "--update-input"
-      "firefox-addons"
-      "--update-input"
-      "claude-code"
-      "--update-input"
-      "vicinae"
-      "--update-input"
-      "tokyonight-nvim"
-    ];
-  };
 }

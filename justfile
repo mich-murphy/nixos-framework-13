@@ -13,8 +13,12 @@ all: check build
 
 # ── Formatting / linting ─────────────────────────────────────────
 
-# Format all Nix files and eval-check the flake
-check: fmt eval md-lint
+# Check formatting, evaluate the flake, and lint Markdown
+check: fmt-check eval md-lint
+
+# Check formatting without modifying files
+fmt-check:
+    @{{silent}} "fmt-check" nix fmt -- --check .
 
 # Format all .nix files with alejandra
 fmt:

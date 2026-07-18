@@ -6,6 +6,7 @@
   programs.firefox = {
     enable = true;
     configPath = "${config.xdg.configHome}/mozilla/firefox";
+    policies.DisableTelemetry = true;
 
     profiles.default = {
       isDefault = true;
@@ -28,21 +29,10 @@
         "privacy.query_stripping.enabled.pbmode" = true;
         "privacy.bounceTrackingProtection.mode" = 1;
 
-        # DNS-over-HTTPS (Quad9, TRR-only)
-        "network.trr.mode" = 3;
-        "network.trr.uri" = "https://dns.quad9.net/dns-query";
-        "network.trr.custom_uri" = "https://dns.quad9.net/dns-query";
-
         # Disable prefetch & speculative connections
         "network.prefetch-next" = false;
         "network.dns.disablePrefetch" = true;
         "network.http.speculative-parallel-limit" = 0;
-
-        # Telemetry
-        "datareporting.healthreport.uploadEnabled" = false;
-        "datareporting.usage.uploadEnabled" = false;
-        "toolkit.telemetry.unified" = false;
-        "toolkit.telemetry.enabled" = false;
 
         # UI
         "sidebar.verticalTabs" = true;
@@ -60,7 +50,6 @@
 
         # Sponsored content
         "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
-        "browser.urlbar.suggest.quicksuggest.sponsored" = false;
 
         # Misc
         "media.eme.enabled" = true;
@@ -73,20 +62,11 @@
         "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons" = false;
         "browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features" = false;
 
-        # WebRTC leak prevention
-        "media.peerconnection.ice.default_address_only" = true;
-        "media.peerconnection.ice.proxy_only_if_behind_proxy" = true;
-
         # Global Privacy Control
         "privacy.globalprivacycontrol.enabled" = true;
-        "privacy.globalprivacycontrol.functionality.enabled" = true;
 
         # HTTPS-only hardening
         "dom.security.https_only_mode_send_http_background_request" = false;
-
-        # Encrypted Client Hello
-        "network.dns.echconfig.enabled" = true;
-        "network.dns.use_https_rr_as_altsvc" = true;
 
         # Container tabs
         "privacy.userContext.enabled" = true;

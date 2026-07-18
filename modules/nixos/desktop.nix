@@ -2,18 +2,6 @@
   programs.niri.enable = true;
   programs.dconf.enable = true;
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = builtins.attrValues {
-      inherit (pkgs) xdg-desktop-portal-gnome xdg-desktop-portal-gtk;
-    };
-    config.niri = {
-      default = ["gnome" "gtk"];
-      "org.freedesktop.impl.portal.Screenshot" = "gnome";
-      "org.freedesktop.impl.portal.ScreenCast" = "gnome";
-    };
-  };
-
   services.greetd = {
     enable = true;
     settings.default_session = {

@@ -6,7 +6,7 @@
   programs.git = {
     enable = true;
 
-    ignores = [".venv" ".envrc" ".tox" "*.pyc"];
+    ignores = [".venv" ".tox" "*.pyc"];
 
     settings = {
       user = {

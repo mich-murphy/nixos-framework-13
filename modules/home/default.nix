@@ -8,7 +8,6 @@
     ./git.nix
     ./terminals/wezterm.nix
     ./desktop/niri.nix
-    ./desktop/waybar.nix
     ./desktop/mako.nix
     ./desktop/vicinae.nix
     ./desktop/hyprlock.nix
@@ -26,10 +25,7 @@
     username = "michael";
     homeDirectory = "/home/michael";
     stateVersion = "25.05";
-    sessionVariables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
-    };
+    sessionVariables.BROWSER = "firefox";
   };
 
   programs.home-manager.enable = true;

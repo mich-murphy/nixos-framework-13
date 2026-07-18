@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-NixOS configuration for a Framework 13 (AMD Ryzen AI 7 350) — standalone flake with nixpkgs-unstable, home-manager, disko, and nixos-hardware.
+NixOS configuration for a Framework 13 (AMD Ryzen AI 7 350) — standalone flake with nixpkgs-unstable, home-manager, and nixos-hardware.
 
 ## Project map
 
@@ -26,7 +26,8 @@ All commands use context-efficient wrappers (PASS/FAIL summary, detail only on f
 | Command | What it does |
 | --- | --- |
 | `just all` | Run everything: check + build |
-| `just check` | Format (alejandra) + eval-only flake check + Markdown lint |
+| `just check` | Check formatting + eval-only flake check + Markdown lint |
+| `just fmt-check` | Check Nix formatting without modifying files |
 | `just fmt` | Format all Nix files with alejandra |
 | `just eval` | Eval-only flake syntax check (~5s) |
 | `just md-lint` | Lint all `.md` files with `markdownlint-cli2` |
